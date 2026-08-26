@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.svg" alt="falsify — AI 科学思维协议" width="100%">
+  <img src="docs/social-preview.png" alt="falsify — AI 科学思维协议" width="100%">
 </div>
 
 <h1 align="center">falsify · 证伪引擎</h1>

@@ -1,8 +1,5 @@
 <div align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/banner.svg">
-    <img src="assets/banner.svg" alt="falsify — the scientific thinking protocol for AI agents" width="100%">
-  </picture>
+  <img src="docs/social-preview.png" alt="falsify — the scientific thinking protocol for AI agents" width="100%">
 </div>
 
 <h1 align="center">falsify</h1>
