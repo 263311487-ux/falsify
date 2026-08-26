@@ -1,0 +1,36 @@
+{
+  "name": "falsify-skill",
+  "version": "0.8.1",
+  "description": "The scientific thinking protocol for AI agents. Falsify before you believe. 像一流科学家一样思考：先证伪，再相信。",
+  "keywords": ["falsify", "falsification", "scientific-thinking", "ai-agents", "skill", "codex", "claude", "prompt-engineering", "epistemics", "reasoning"],
+  "license": "MIT",
+  "author": "Bai Xing (白星) <263311487@qq.com>",
+  "type": "module",
+  "bin": {
+    "falsify-skill": "bin/falsify-skill.mjs"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "references",
+    "templates",
+    "evals",
+    "bin",
+    "docs",
+    "assets"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "homepage": "https://github.com/263311487-ux/falsify",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/263311487-ux/falsify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/263311487-ux/falsify/issues"
+  }
+}

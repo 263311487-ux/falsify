@@ -67,6 +67,16 @@ Or with the skills CLI:
 npx skills add 263311487-ux/falsify
 ```
 
+Or from npm (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
+
+```text
+npx falsify-skill
+```
+
+```text
+npm i -g falsify-skill && falsify-skill
+```
+
 Or manually: clone the repo and copy `SKILL.md` into your agent's skills directory
 (`~/.codex/skills/falsify/`, `~/.claude/skills/falsify/`, `.cursor/skills/falsify/`, …).
 

@@ -64,6 +64,12 @@ Install the falsify skill from https://github.com/263311487-ux/falsify, refer to
 
 ```text
 npx skills add 263311487-ux/falsify
+
+或通过 npm 安装（自动把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
+
+```text
+npx falsify-skill
+```
 ```
 
 或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
