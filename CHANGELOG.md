@@ -1,4 +1,12 @@
 # Changelog
+## 0.8.3 (2026-08-27)
+
+- Second-model validation: full 28-case suite run on **deepseek-reasoner** (judge: deepseek-chat) → **26/28, avg 15.3/18**; cross-checked with deepseek-chat generator × deepseek-reasoner judge → **26/28, avg 16.4/18**. Failures are disjoint and each was manually re-checked as protocol-compliant (single-run variance, not stable gaps). Report: `evals/results/deepseek-reasoner-2026-08-27.md`
+- Eval harness hardened for reasoner-class models: 8000 max_tokens on generation, retry-on-empty-content (reasoning_content shares the budget), degenerate generations marked instead of silently scored 0
+- Fairer Stage-0 scoring: judge outputs `stage0` (refuse-to-conclude is the primary behavior); such answers pass on Iron Law + no anti-pattern instead of needing all six dimensions
+- Protocol fix: mandatory **MODE SELECTION** gate (Incident / Simple / Nudge / Question / Depth) before the five stages — reasoner once ran the full protocol on a live incident instead of acting at ~70% confidence (case 26); now routes correctly
+- Deployment note added: reasoner-class models can spend the whole token budget on reasoning and return empty content on deep debugging questions — set generous `max_tokens` or prefer deepseek-chat
+- SKILL.md 0.8.3
 ## 0.8.2 (2026-08-27)
 
 - Cross-model eval harness (`evals/run_evals.mjs`, zero-dependency): run the full 28-case suite on any DeepSeek model with mode-aware scoring (depth / simple / nudge / question / routing), 3x judge median, reproducible report. First result: deepseek-chat 26/28, avg 13.5/18, 15 cases 18/18

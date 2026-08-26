@@ -118,7 +118,14 @@ See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). Thr
 
 Real-community cross-validation (external dogfood) is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): 4 real questions from GitHub issues and Stack Overflow, 4/4 passed, and 3/3 cases with a known ground truth matched reality.
 
-**Cross-model proof (2026-08-27):** the full 28-case suite was run on **deepseek-chat** — not our own agent — scoring **26/28 pass, avg 13.5/18, 15 cases at 18/18** (3x judge median, mode-aware rubric). Reproduce in one command: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-chat`. Report: [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md).
+**Cross-model proof (2026-08-27, v0.8.3):** the full 28-case suite is run on **two external DeepSeek models** — not our own agent — in both directions:
+
+- `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 pass, avg 15.3/18**
+- `deepseek-chat` generator × `deepseek-reasoner` judge → **26/28 pass, avg 16.4/18**
+
+The two rounds fail on disjoint cases (reasoner: 3/9; chat: 6/22); each failing case was regenerated manually and produced protocol-compliant output, so the failures are single-run variance, not stable protocol gaps. This round also fixed a real routing gap the reasoner exposed (live incidents must act at ~70% confidence, not run the full protocol) via a mandatory MODE SELECTION gate. Reproduce in one command: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`. Reports: [evals/results/deepseek-reasoner-2026-08-27.md](evals/results/deepseek-reasoner-2026-08-27.md) · [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md).
+
+> **Deployment note (reasoner-class models):** `reasoning_content` and `content` share the `max_tokens` budget; on very deep debugging questions the reasoner can spend the entire budget on reasoning and return **empty content** (observed at 6k–16k tokens). Set a generous `max_tokens`, add a retry-on-empty policy, or prefer `deepseek-chat` for latency-constrained deployments.
 
 ## Why "falsify"
 
