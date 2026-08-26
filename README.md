@@ -118,6 +118,8 @@ See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). Thr
 
 Real-community cross-validation (external dogfood) is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): 4 real questions from GitHub issues and Stack Overflow, 4/4 passed, and 3/3 cases with a known ground truth matched reality.
 
+**Cross-model proof (2026-08-27):** the full 28-case suite was run on **deepseek-chat** — not our own agent — scoring **26/28 pass, avg 13.5/18, 15 cases at 18/18** (3x judge median, mode-aware rubric). Reproduce in one command: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-chat`. Report: [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md).
+
 ## Why "falsify"
 
 The best coding agents are already excellent at producing answers. They are less good at *not believing their own answers*. falsify borrows the only epistemology that has a 400-year track record of not lying to itself — the scientific method — and turns it into five stages an agent can actually run.

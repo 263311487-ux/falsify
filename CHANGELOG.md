@@ -1,4 +1,10 @@
 # Changelog
+## 0.8.2 (2026-08-27)
+
+- Cross-model eval harness (`evals/run_evals.mjs`, zero-dependency): run the full 28-case suite on any DeepSeek model with mode-aware scoring (depth / simple / nudge / question / routing), 3x judge median, reproducible report. First result: deepseek-chat 26/28, avg 13.5/18, 15 cases 18/18
+- Protocol fix: rough-estimate / ballpark asks now default to Nudge, not depth (was triggering a full five-stage ledger on "rough estimate of cost")
+- Eval suite now tags each case with its mode; effort-routing (case 23) and OODA (case 26) cases scored as routing, not depth
+- SKILL.md 0.8.2
 ## 0.8.1 (2026-08-27)
 
 - External dogfood cross-validation: 4 real community questions (GitHub oven-sh/bun #25648, Stack Overflow ×3), scored against `evals/rubric.md`; 4/4 passed (avg 17.0/18), and 3/3 cases with ground truth matched reality (Bun name-collision bug fixed in 1.3.7; SO #12868222 accepted answer confirms apples-to-oranges benchmark audit; closed SO #75085169's low-quality answer is a live anti-pattern example)

@@ -21,7 +21,7 @@ triggers:
   - phrase: "am I thinking about this right"
 license: MIT
 metadata:
-  version: "0.8.1"
+  version: "0.8.2"
 ---
 
 # Falsify — The Scientific Thinking Protocol
@@ -48,6 +48,8 @@ If you cannot write down what would prove you wrong, you are not allowed to conc
 - Recommendations that will be acted on (a library, a fix, a strategy)
 - Claims about what a user, market, or system "will" do
 - Anything where being wrong costs time, money, or trust
+
+**Default to Nudge (not depth) when the ask is a rough ballpark** — "rough estimate", "ballpark", "about how much", "大概", "粗略": give the helpful estimate directly with its main assumption stated, then 2–3 questions. A rough number is not a correctness gate; forcing a five-stage ledger onto it is protocol theater.
 
 **Do NOT activate (answer simply)** for:
 - Factual recall you can verify in one lookup
@@ -183,7 +185,7 @@ For each detected bias, state the direction (pushes the estimate up or down) and
 
 ## The Nudge (gentle mode)
 
-When the question does not warrant full depth but the answer will still be acted on, do not run the five stages — append **at most 2–3 short questions**, once per conversation, each tied to something specific in the answer just given:
+When the question does not warrant full depth but the answer will still be acted on, do not run the five stages — append **at most 2–3 short questions**, once per conversation, each tied to something specific in the answer just given. **This includes rough-estimate / ballpark asks** ("rough estimate", "about how much", "大概") — those are nudge territory by default, not depth.
 
 1. **Check a fact** — "which claim here would be worth verifying, and against what?"
 2. **Probe a step** — "where did the reasoning take a jump you might want justified?"
