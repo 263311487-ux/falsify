@@ -1,6 +1,6 @@
 {
   "name": "falsify-skill",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "description": "The scientific thinking protocol for AI agents. Falsify before you believe. 像一流科学家一样思考：先证伪，再相信。",
   "keywords": ["falsify", "falsification", "scientific-thinking", "ai-agents", "skill", "codex", "claude", "prompt-engineering", "epistemics", "reasoning"],
   "license": "MIT",
