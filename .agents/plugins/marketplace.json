@@ -5,7 +5,8 @@
   "plugins": [
     {
       "path": "https://github.com/263311487-ux/falsify",
-      "name": "falsify"
+      "name": "falsify",
+      "source": "./"
     }
   ]
 }

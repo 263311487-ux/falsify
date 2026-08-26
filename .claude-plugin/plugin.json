@@ -8,9 +8,6 @@
   },
   "license": "MIT",
   "skills": [
-    {
-      "id": "falsify",
-      "path": "../SKILL.md"
-    }
+    "skills/"
   ]
 }

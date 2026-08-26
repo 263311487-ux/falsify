@@ -5,7 +5,16 @@
   "plugins": [
     {
       "path": "https://github.com/263311487-ux/falsify",
-      "name": "falsify"
+      "name": "falsify",
+      "source": "./",
+      "category": "productivity",
+      "tags": [
+        "thinking",
+        "mental-models",
+        "reasoning",
+        "falsification",
+        "decision-making"
+      ]
     }
   ]
 }
