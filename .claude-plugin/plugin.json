@@ -1,0 +1,16 @@
+{
+  "name": "falsify",
+  "version": "0.8.1",
+  "description": "The scientific thinking protocol for AI agents. Falsify before you believe.",
+  "author": {
+    "name": "Baixing",
+    "email": "263311487@qq.com"
+  },
+  "license": "MIT",
+  "skills": [
+    {
+      "id": "falsify",
+      "path": "../SKILL.md"
+    }
+  ]
+}

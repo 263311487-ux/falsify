@@ -1,0 +1,15 @@
+{
+  "name": "falsify",
+  "version": "0.8.1",
+  "description": "The scientific thinking protocol for AI agents.",
+  "author": {
+    "name": "Baixing"
+  },
+  "license": "MIT",
+  "skills": [
+    {
+      "id": "falsify",
+      "path": "../SKILL.md"
+    }
+  ]
+}

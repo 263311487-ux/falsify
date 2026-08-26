@@ -1,0 +1,11 @@
+{
+  "name": "falsify",
+  "version": "0.8.1",
+  "description": "The scientific thinking protocol for AI agents.",
+  "plugins": [
+    {
+      "path": "https://github.com/263311487-ux/falsify",
+      "name": "falsify"
+    }
+  ]
+}
