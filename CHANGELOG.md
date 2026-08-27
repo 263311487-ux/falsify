@@ -6,6 +6,7 @@
 - Fairer Stage-0 scoring: judge outputs `stage0` (refuse-to-conclude is the primary behavior); such answers pass on Iron Law + no anti-pattern instead of needing all six dimensions
 - Protocol fix: mandatory **MODE SELECTION** gate (Incident / Simple / Nudge / Question / Depth) before the five stages — reasoner once ran the full protocol on a live incident instead of acting at ~70% confidence (case 26); now routes correctly
 - Deployment note added: reasoner-class models can spend the whole token budget on reasoning and return empty content on deep debugging questions — set generous `max_tokens` or prefer deepseek-chat
+- Repo hygiene: synced all SKILL copies (`skills/falsify`, `.cursor`) and 6 plugin/marketplace JSON stamps to 0.8.3; landing page shows dual-model proof; zh-CN README matches EN; new CI consistency gate (`.github/check_consistency.py`) catches copy/version drift
 - SKILL.md 0.8.3
 ## 0.8.2 (2026-08-27)
 
