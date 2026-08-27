@@ -112,6 +112,15 @@ npx falsify-skill
 
 真实社区交叉验证（外部 dogfood）见 [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md)：4 个来自 GitHub issue 与 Stack Overflow 的真实问题，4/4 通过，其中 3/3 有真实结论的用例判断与事实一致。
 
+**跨模型证明（2026-08-27，v0.8.3）**：28 个用例在**两个外部 DeepSeek 模型**上双向跑通——不是我们自己的智能体：
+
+- `deepseek-reasoner` 生成 × `deepseek-chat` 判分 → **26/28 通过，均分 15.3/18**
+- `deepseek-chat` 生成 × `deepseek-reasoner` 判分 → **26/28 通过，均分 16.4/18**
+
+两轮失败用例互不相交（reasoner：3/9；chat：6/22），且每个失败用例都手动重生成复核为协议合规——失败是单次生成/判分波动，不是协议稳定缺口。本轮还修复了 reasoner 暴露的真实路由缺口（生产事故必须 ~70% 置信度先行动，而不是跑完整协议），通过强制的 MODE SELECTION 门实现。单命令复现：`DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`。报告：[evals/results/deepseek-reasoner-2026-08-27.md](evals/results/deepseek-reasoner-2026-08-27.md) · [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md)。
+
+> **部署注意（reasoner 类模型）**：`reasoning_content` 与 `content` 共享 `max_tokens` 预算；在非常深的调试问题上，reasoner 可能把全部预算花在推理上并返回**空回复**（6k–16k token 均观察到）。请设置充足的 `max_tokens`、加空回复重试策略，或对延迟敏感场景优先用 `deepseek-chat`。
+
 ## 为什么是"证伪"
 
 最优秀的编码智能体已经非常擅长产出答案，但不太擅长**不相信自己的答案**。falsify 借用了唯一有 400 年"不骗自己"记录的认识论——科学方法——把它变成智能体真正能跑起来的五个阶段。

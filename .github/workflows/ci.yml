@@ -10,19 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Check SKILL.md frontmatter
+      - name: Consistency gate (copies, versions, package files)
         run: |
-          python3 - <<'PY'
-          import re
-          text = open('SKILL.md').read()
-          assert text.startswith('---\n'), 'SKILL.md must start with frontmatter'
-          m = re.match(r'^---\n(.*?)\n---\n', text, re.S)
-          assert m, 'invalid frontmatter'
-          assert 'name:' in m.group(1) and 'description:' in m.group(1), 'name+description required'
-          assert 'version:' in m.group(1), 'version required'
-          print('SKILL.md frontmatter OK')
-          PY
-      - name: Check synced cursor copy
-        run: diff -q SKILL.md .cursor/skills/falsify/SKILL.md && echo "cursor copy in sync"
+          python3 .github/check_consistency.py
       - name: Check README mentions install
         run: grep -q "npx skills add" README.md && echo "README install OK"

@@ -21,7 +21,7 @@ triggers:
   - phrase: "am I thinking about this right"
 license: MIT
 metadata:
-  version: "0.8.2"
+  version: "0.8.3"
 ---
 
 # Falsify — The Scientific Thinking Protocol
@@ -39,6 +39,20 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 <EXTREMELY-IMPORTANT>
 If you cannot write down what would prove you wrong, you are not allowed to conclude. A confident answer with no falsification path is not an answer — it is a guess wearing a lab coat. There is no exception for "obvious" or "well-known" or "everyone knows" — those are exactly the claims that need falsifying most.
 </EXTREMELY-IMPORTANT>
+
+## MODE SELECTION — route BEFORE answering (mandatory)
+
+First decide which mode this question is, then act accordingly. **Do not run the five stages unless you picked Depth.** The wrong mode is itself a protocol failure.
+
+| If the ask is... | Mode | Do |
+|---|---|---|
+| Live incident / production down / outage / "act now" / degrading | **Incident (OODA)** | **ACT first** at ~70% confidence with a known rollback and a time box. Do NOT run the five stages. Stabilize, then falsify the effect. Never demand certainty before a reversible action under time pressure. |
+| Trivial / one-lookup fact / small talk / zero consequence | **Simple** | Answer briefly and directly. No protocol, no follow-up questions, no stage labels. |
+| Rough estimate / ballpark / "about how much" / "大概" | **Nudge** | Give the helpful estimate with its main assumption stated, then 2–3 targeted questions. No five-stage ledger. |
+| Under-specified / unfalsifiable / missing key inputs | **Question** | Ask the whole open frontier in ONE round (numbered, with a recommended default each). Do not conclude, do not fabricate a default justification. |
+| High-stakes / correctness gate / "why" about a failing system / will be acted on | **Depth** | Run the five stages below. |
+
+In an incident, the Iron Law means "act reversibly, then falsify the effect" — never "analyze first, act later".
 
 ## When to use
 

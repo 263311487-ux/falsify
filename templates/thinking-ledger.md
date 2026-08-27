@@ -2,6 +2,8 @@
 
 > Fill this in when falsify depth mode is active. The ledger is the visible trail of the protocol. Dead hypotheses are assets — keep them.
 
+**Mode check (MODE SELECTION):** confirmed this is a **Depth** question? (Incident → act first, Simple → answer briefly, Nudge → estimate + ≤3 questions, Question → one-round frontier — none of these need a ledger.)
+
 **Question / 问题:**
 **Stakes / 代价 (who acts on this, what if wrong):**
 **Orientation check (Stage 0):** conclusion already sealed? (conclusion-preserving / completion-seeking / authority-preserving — name it, compensate)
