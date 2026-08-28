@@ -1,4 +1,9 @@
 # Changelog
+## 0.8.5 (2026-08-28)
+
+- Distribution round 4: [PR #975](https://github.com/VoltAgent/awesome-agent-skills/pull/975) — Productivity and Collaboration section of VoltAgent/awesome-agent-skills (⭐33k)
+- Distribution round 5: [PR #257](https://github.com/composio-community/awesome-codex-skills/pull/257) upgraded — moved to Meta & Utilities with dual-model 26/28 proof (composio-community/awesome-codex-skills, ⭐16k)
+- In-flight PR portfolio (total ~197k stars of exposure): awesome-llm-apps #1124 (⭐134.7k) · VoltAgent #975 (⭐33k) · awesome-codex-skills #257 (⭐16k) · awesome-dsh-plugin #3596 (⭐13.3k)
 ## 0.8.4 (2026-08-28)
 
 - Distribution round 1: **skills.sh** (Vercel's official Agent Skills directory) auto-indexed falsify — live page https://skills.sh/263311487-ux/falsify, installs via `npx skills add 263311487-ux/falsify`
