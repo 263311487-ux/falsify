@@ -419,6 +419,9 @@ $("vc-run").addEventListener("click",()=>{
   out.className="vc show";
 });
 $("vc-input").addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter")$("vc-run").click()});
+// shareable: ?q= prefills and runs the checker
+const q=new URLSearchParams(location.search).get("q");
+if(q){$("vc-input").value=q;$("vc-run").click()}
 </script>
 
 </body>
