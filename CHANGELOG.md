@@ -1,4 +1,8 @@
 # Changelog
+## 0.8.6 (2026-08-28)
+
+- **Milestone: falsify is now MERGED into `sickn33/agentic-awesome-skills` (⭐45.5k)** — the maintainer repaired and merged our 8/26 contribution via PR #1281 (preserving our attribution), including companion `references/` and `templates/` files. Live in the AAS catalog (`CATALOG.md`) and installable by Codex/Claude through the AAS CLI/MCP.
+- Cleanup: closed duplicate PR #1286 opened before the merge was noticed; branch content superseded by the merged version.
 ## 0.8.5 (2026-08-28)
 
 - Distribution round 4: [PR #975](https://github.com/VoltAgent/awesome-agent-skills/pull/975) — Productivity and Collaboration section of VoltAgent/awesome-agent-skills (⭐33k)
