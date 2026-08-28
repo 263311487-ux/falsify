@@ -1,8 +1,11 @@
 # Changelog
 ## 0.8.4 (2026-08-28)
 
-- Distribution: added as an external entry to `Shubhamsaboo/awesome-llm-apps` (⭐134.7k) → [PR #1124](https://github.com/Shubhamsaboo/awesome-llm-apps/pull/1124), listed in 🧩 Agent Skills alongside thinking-out-loud / scope-creep-detector / project-graveyard
-- Live checker link (https://263311487-ux.github.io/falsify/) now referenced in the PR as the evidence-first demo
+- Distribution round 1: **skills.sh** (Vercel's official Agent Skills directory) auto-indexed falsify — live page https://skills.sh/263311487-ux/falsify, installs via `npx skills add 263311487-ux/falsify`
+- Distribution round 2: [PR #1124](https://github.com/Shubhamsaboo/awesome-llm-apps/pull/1124) — external entry in 🧩 Agent Skills of awesome-llm-apps (⭐134.7k)
+- Distribution round 3: [PR #3596](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/3596) — Skills section of awesome-dsh-plugin (⭐13.3k)
+- Cross-links: falsify ↔ dsh-verify ↔ imprint-pdf ↔ Xun READMEs now reference each other (think → verify → present workflow)
+
 ## 0.8.3 (2026-08-27)
 
 - Second-model validation: full 28-case suite run on **deepseek-reasoner** (judge: deepseek-chat) → **26/28, avg 15.3/18**; cross-checked with deepseek-chat generator × deepseek-reasoner judge → **26/28, avg 16.4/18**. Failures are disjoint and each was manually re-checked as protocol-compliant (single-run variance, not stable gaps). Report: `evals/results/deepseek-reasoner-2026-08-27.md`
