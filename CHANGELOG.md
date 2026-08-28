@@ -1,4 +1,8 @@
 # Changelog
+## 0.8.8 (2026-08-28)
+
+- Distribution round 6: [PR #451](https://github.com/heilcheng/awesome-agent-skills/pull/451) — Community Skills of heilcheng/awesome-agent-skills (⭐6.1k)
+- PR portfolio now 6 open + 1 merged (AAS #1281): awesome-llm-apps #1124 (⭐134.7k) · AAS update #1287 (⭐45.5k) · VoltAgent #975 (⭐33k) · awesome-codex-skills #257 (⭐16k) · awesome-dsh-plugin #3596 (⭐13.3k) · heilcheng #451 (⭐6.1k)
 ## 0.8.7 (2026-08-28)
 
 - Submitted update PR to AAS: [PR #1287](https://github.com/sickn33/agentic-awesome-skills/pull/1287) — syncs the merged falsify skill to 0.8.3 (mandatory MODE SELECTION gate + Nudge routing), structure/frontmatter preserved for AAS compatibility, `validate --strict` passes
