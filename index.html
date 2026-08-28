@@ -106,6 +106,10 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
 .checker textarea:focus{outline:none;border-color:var(--accent)}
 .checker .row{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
 .checker .hint{font-size:12px;color:var(--faint)}
+.vc-samples{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:5px 13px;
+  cursor:pointer;background:var(--bg2);transition:border-color .15s,color .15s}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
 .vc{display:none;margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
 .vc.show{display:block;animation:fadein .25s ease}
 @keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -130,6 +134,24 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
   border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:8px;padding:12px 14px;color:var(--dim);
   white-space:pre-wrap;word-break:break-word}
 .vc-note{font-size:12px;color:var(--faint);margin-top:10px}
+
+/* ── quiz ─────────────────────────── */
+.quiz{display:grid;gap:14px;margin-top:8px}
+.qz{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.qz .q{font-size:14.5px;font-weight:600;margin-bottom:12px;line-height:1.6}
+.qz .opts{display:grid;gap:8px}
+.qz .opt{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--dim);
+  border:1px solid var(--line);border-radius:9px;padding:10px 14px;cursor:pointer;transition:border-color .15s,background .15s}
+.qz .opt:hover{border-color:var(--accent);background:var(--bg2)}
+.qz .opt.on{border-color:var(--accent);background:var(--bg2);color:var(--ink)}
+.qz .opt.correct{border-color:var(--accent2);background:rgba(52,224,161,.08);color:var(--ink)}
+.qz .opt.wrong{border-color:var(--red);background:rgba(255,107,107,.08);color:var(--ink)}
+.qz .opt .k{font-family:var(--mono);font-weight:700;color:var(--accent)}
+.qz .why{display:none;font-size:12.5px;color:var(--faint);margin-top:10px;border-top:1px solid var(--line);padding-top:10px;line-height:1.7}
+.qz .why.show{display:block;animation:fadein .2s ease}
+.qz .why b{color:var(--ink)}
+.quiz-score{margin-top:16px;text-align:center;font-size:14px;color:var(--dim)}
+.quiz-score b{font-size:22px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 
 /* ── stages ───────────────────────── */
 .stage-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
@@ -288,12 +310,23 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
     <p class="sec-sub">输入一个你正准备下的结论（技术判断、产品决策、投资判断都行）。检查器按 falsify 协议跑一遍清单——不判对错，只查「你还差什么才配下这个结论」。</p>
     <div class="checker">
       <textarea id="vc-input" placeholder="例：这个慢查询显然是缓存的问题，把缓存修了就好。"></textarea>
+      <div class="vc-samples" id="vc-samples"></div>
       <div class="row">
         <button id="vc-run" class="btn btn-primary">用 falsify 检查</button>
         <span class="hint">纯前端检查器 · 不发送任何数据 · 不判对错，只查缺失</span>
       </div>
       <div id="vc-out" class="vc"></div>
     </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-label">Test yourself · 1 分钟</div>
+    <h2>哪个结论可证伪？</h2>
+    <p class="sec-sub">五道小题，测测你的「证伪直觉」。选完立即看解析。</p>
+    <div class="quiz" id="quiz"></div>
+    <div class="quiz-score" id="quiz-score"></div>
   </div>
 </section>
 
@@ -419,6 +452,74 @@ $("vc-run").addEventListener("click",()=>{
   out.className="vc show";
 });
 $("vc-input").addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter")$("vc-run").click()});
+
+// one-click samples
+const SAMPLES=[
+  "这个慢查询显然是缓存的问题，把缓存修了就好。",
+  "肯定是内存泄漏，与其排查不如直接换台机器。",
+  "我们的新功能很成功，因为用户反馈都是正面的。",
+  "周末订单暴增，说明上次的营销活动非常有效。",
+  "因为冰淇淋销量和溺水人数一起涨，所以是冰淇淋导致了溺水。",
+  "API 肯定扛得住 10 万并发，架构很成熟。",
+  "这个 bug 重启就好了，不用深究。",
+  "大概要花 3 万块。",
+];
+SAMPLES.forEach(s=>{
+  const c=document.createElement("span");
+  c.className="chip";c.title=s;
+  c.textContent=s.length>14?s.slice(0,13)+"…":s;
+  c.onclick=()=>{$("vc-input").value=s;$("vc-run").click();};
+  $("vc-samples").appendChild(c);
+});
+
+// falsifiability quiz
+const QUIZ=[
+  {q:"哪个陈述可证伪？",
+   opts:["我的猫爱我","这只猫体重 4.2kg","猫是液体","我的猫恨我"],c:1,
+   why:"体重可以用秤直接验证，有明确的判死条件。其余三项是主观或玩笑陈述，没有任何可观察的信号能推翻它们——不可证伪，就不能当结论。"},
+  {q:"「太阳明天会升起」——按 falsify 协议，正确的处理是？",
+   opts:["这是常识，直接相信","写下可证伪预测，按基率与证据分级收束，不搞绝对主义","必须每天凌晨观测才能下结论","拒绝回答，因为没有绝对确定性"],c:1,
+   why:"协议反对的是「自信却没有证伪路径」，不是要求永远怀疑一切。极高基率 + 低成本确认时，按证据分级收束就是正确姿势；为每个常识跑全套深度分析反而是协议剧场。"},
+  {q:"哪种证据最能杀死「H：这个错误来自缓存」？",
+   opts:["有人觉得不是缓存","绕过缓存后错误仍然出现","缓存的文档说它没这个 bug","缓存最近没更新"],c:1,
+   why:"「绕过缓存 → 错误仍在」直接触发 ¬O，H 立即死亡，这是唯一的裁决性证据。其余都是二手观点或间接信息，不能让 H 死亡。"},
+  {q:"「营销导致销量上升」——下这个结论之前，最缺什么？",
+   opts:["对照组：不投放时段的销量","更贵的营销预算","更多的广告位","什么都不缺，很明显"],c:0,
+   why:"没有对照就没有因果证据。周末、节日的自然波动就能制造假相关——先找一个『没有营销的同期』做对照，再谈因果。"},
+  {q:"哪个是「钢人化」（steelman）的正确姿势？",
+   opts:["把对方的观点说弱一点，方便反驳","把对方最强的版本说出来，再攻击它","忽略对方观点","先同意对方所有观点"],c:1,
+   why:"钢人化 = 先把对手的论证补到最强，再进攻；如果最强版本都站不住，结论才稳。把观点说弱再反驳是稻草人——反模式。"},
+];
+const quizEl=$("quiz");let qScore=0;
+QUIZ.forEach((qz,qi)=>{
+  const card=document.createElement("div");card.className="qz";
+  card.innerHTML=`<div class="q">${qi+1}. ${qz.q}</div><div class="opts"></div><div class="why"></div>`;
+  const opts=card.querySelector(".opts");
+  const why=card.querySelector(".why");
+  qz.opts.forEach((o,oi)=>{
+    const d=document.createElement("div");d.className="opt";
+    d.innerHTML=`<span class="k">${"ABCD"[oi]}</span><span>${o}</span>`;
+    d.onclick=()=>{
+      if(qz.done)return;qz.done=true;
+      const correct=oi===qz.c;
+      if(correct)qScore++;
+      opts.querySelectorAll(".opt").forEach((el,i)=>{
+        if(i===qz.c)el.classList.add("correct");
+        else if(i===oi)el.classList.add("wrong");
+      });
+      why.innerHTML=`<b>${correct?"✓ 答对了":"✗ 选错了"}</b> · ${qz.why}`;
+      why.classList.add("show");
+      const all=QUIZ.every(x=>x.done);
+      if(all){
+        $("quiz-score").innerHTML=`得分 <b>${qScore}/5</b> — ${qScore>=4?"证伪直觉很强，去装 falsify 让智能体也学会":qScore>=2?"方向对，还差临门一脚": "别急——大多数人第一次也选不对，这正是协议存在的意义"}。
+          <br><a href="#try">把下一个结论丢进检查器试试 →</a>`;
+      }
+    };
+    opts.appendChild(d);
+  });
+  quizEl.appendChild(card);
+});
+
 // shareable: ?q= prefills and runs the checker
 const q=new URLSearchParams(location.search).get("q");
 if(q){$("vc-input").value=q;$("vc-run").click()}
