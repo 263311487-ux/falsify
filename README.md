@@ -135,6 +135,22 @@ The best coding agents are already excellent at producing answers. They are less
 
 Built on a simple inheritance: 公理 → 假设 → 对抗 → 验证 → 收束. Axiom → Hypothesis → Adversarialize → Verify → Converge.
 
+
+## Sibling projects
+
+falsify is one leg of a three-part workflow: **think** → **verify** → **present**.
+
+- [**dsh-verify**](https://github.com/263311487-ux/dsh-verify) — browser-verified delivery. falsify keeps the thinking honest; dsh-verify keeps the *browser* honest (real-browser tests, not LLM-judged vibes). Use both: falsify catches the wrong conclusion, dsh-verify catches the broken output.
+- [**imprint-pdf**](https://github.com/263311487-ux/imprint-pdf) — publisher-grade PDF rendering from Markdown, with a 0–100 print-quality gate. The polished output end of the pipeline.
+
+Install any of them in one command:
+```bash
+npx skills add 263311487-ux/falsify
+npx dsh-verify
+npx imprint
+```
+
 ## License
+
 
 MIT. See [LICENSE](LICENSE).
