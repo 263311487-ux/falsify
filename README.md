@@ -11,6 +11,8 @@
 
 <p align="center">
   <a href="https://img.shields.io/github/stars/263311487-ux/falsify"><img src="https://img.shields.io/github/stars/263311487-ux/falsify?style=flat-square&label=stars" alt="Stars"></a>
+  <img src="https://img.shields.io/npm/v/falsify-skill?style=flat-square&label=npm" alt="npm version">
+  <img src="https://img.shields.io/npm/dm/falsify-skill?style=flat-square&label=npm%20downloads" alt="npm downloads">
   <img src="https://img.shields.io/badge/works%20with-20%2B%20agents-111111?style=flat-square" alt="Works with 20+ agents">
   <img src="https://img.shields.io/badge/license-MIT-111111?style=flat-square" alt="MIT">
   <a href="https://skills.sh/263311487-ux/falsify"><img src="https://skills.sh/b/263311487-ux/falsify" alt="skills.sh installs"></a>
