@@ -1,4 +1,8 @@
 # Changelog
+## 0.8.4 (2026-08-28)
+
+- Distribution: added as an external entry to `Shubhamsaboo/awesome-llm-apps` (⭐134.7k) → [PR #1124](https://github.com/Shubhamsaboo/awesome-llm-apps/pull/1124), listed in 🧩 Agent Skills alongside thinking-out-loud / scope-creep-detector / project-graveyard
+- Live checker link (https://263311487-ux.github.io/falsify/) now referenced in the PR as the evidence-first demo
 ## 0.8.3 (2026-08-27)
 
 - Second-model validation: full 28-case suite run on **deepseek-reasoner** (judge: deepseek-chat) → **26/28, avg 15.3/18**; cross-checked with deepseek-chat generator × deepseek-reasoner judge → **26/28, avg 16.4/18**. Failures are disjoint and each was manually re-checked as protocol-compliant (single-run variance, not stable gaps). Report: `evals/results/deepseek-reasoner-2026-08-27.md`
