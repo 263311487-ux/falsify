@@ -99,6 +99,38 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
 .ba-foot .score b{color:var(--accent2)}
 .ba-caption{font-size:13px;color:var(--faint);text-align:center;margin-top:6px}
 
+/* ── checker ──────────────────────── */
+.checker{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-top:8px}
+.checker textarea{width:100%;min-height:110px;background:var(--code);border:1px solid var(--line);border-radius:10px;
+  color:var(--ink);font-family:var(--mono);font-size:14px;padding:14px;resize:vertical;line-height:1.6}
+.checker textarea:focus{outline:none;border-color:var(--accent)}
+.checker .row{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.checker .hint{font-size:12px;color:var(--faint)}
+.vc{display:none;margin-top:18px;border-top:1px solid var(--line);padding-top:18px}
+.vc.show{display:block;animation:fadein .25s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.vc-card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.vc-card h4{font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.vc-card h4 .tag{font-size:10.5px;font-weight:700;letter-spacing:1.5px;color:#04121a;background:var(--accent);
+  border-radius:5px;padding:2px 8px}
+.vc-card h4 .tag.warn{background:var(--warn)}
+.vc-card h4 .tag.red{background:var(--red)}
+.vc-card h4 .tag.ok{background:var(--accent2)}
+.vc-card p{font-size:13.5px;color:var(--dim);margin-bottom:8px}
+.vc-card p b{color:var(--ink)}
+.vc-card code{font-family:var(--mono);font-size:12.5px;background:var(--code);border:1px solid var(--line);
+  padding:2px 7px;border-radius:6px;color:var(--gold);word-break:break-all}
+.vc-list{list-style:none;margin-top:4px}
+.vc-list li{font-size:13px;color:var(--dim);padding:5px 0 5px 26px;position:relative}
+.vc-list li::before{content:"✗";position:absolute;left:2px;color:var(--red);font-weight:700}
+.vc-list li.done::before{content:"✓";color:var(--accent2)}
+.vc-list li.done{color:var(--ink)}
+.vc-list b{color:var(--ink)}
+.vc-model{font-family:var(--mono);font-size:12.5px;line-height:1.8;background:var(--code);
+  border:1px solid var(--line);border-left:3px solid var(--accent2);border-radius:8px;padding:12px 14px;color:var(--dim);
+  white-space:pre-wrap;word-break:break-word}
+.vc-note{font-size:12px;color:var(--faint);margin-top:10px}
+
 /* ── stages ───────────────────────── */
 .stage-flow{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
 .stage{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 14px;position:relative;transition:border-color .2s,transform .2s}
@@ -251,6 +283,22 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
 
 <section style="padding-top:0">
   <div class="wrap">
+    <div class="sec-label">Try it · 30 秒</div>
+    <h2>把你的结论丢进来，看协议怎么拆它</h2>
+    <p class="sec-sub">输入一个你正准备下的结论（技术判断、产品决策、投资判断都行）。检查器按 falsify 协议跑一遍清单——不判对错，只查「你还差什么才配下这个结论」。</p>
+    <div class="checker">
+      <textarea id="vc-input" placeholder="例：这个慢查询显然是缓存的问题，把缓存修了就好。"></textarea>
+      <div class="row">
+        <button id="vc-run" class="btn btn-primary">用 falsify 检查</button>
+        <span class="hint">纯前端检查器 · 不发送任何数据 · 不判对错，只查缺失</span>
+      </div>
+      <div id="vc-out" class="vc"></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
     <div class="sec-label">Install</div>
     <h2>30 秒装好</h2>
     <p class="sec-sub">一个 Markdown 文件，零依赖。它不会运行脚本、不访问网络、不碰凭据——只是改变智能体「如何下结论」。</p>
@@ -288,6 +336,90 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
     <span><a href="https://github.com/263311487-ux/falsify">GitHub</a> · <a href="https://github.com/263311487-ux/falsify/blob/main/evals/cases.md">Evals</a> · <a href="https://263311487-ux.github.io/falsify/">Home</a></span>
   </div>
 </div>
+
+<script>
+const RED_FLAGS=["显然","明显","肯定","一定","就是","毫无疑问","明摆着","不用说","大家都知道","不可能"];
+const OBS_WORDS=["快","慢","延迟","崩溃","错误","报错","响应","耗时","成本","收入","数量","涨","跌","%","秒","分钟","小时","天","次","并发","用户","延迟","吞吐","内存","CPU"];
+const INCIDENT_WORDS=["事故","宕机","线上","生产","崩溃","down","outage","紧急","degrad"];
+const NUDGE_WORDS=["大概","约","粗略","估算","ballpark","rough","差不多"];
+const SIMPLE_WORDS=["几点","现在时间","天气","是谁","哪年"];
+const $=id=>document.getElementById(id);
+
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+
+function modeRoute(text){
+  if(INCIDENT_WORDS.some(w=>text.toLowerCase().includes(w)))
+    return {m:"Incident（事故）", tag:"red", note:"线上事故 → 先以 ~70% 置信度做可逆操作稳住，再证伪效果。协议禁止在事故里先跑完整分析。"};
+  if(NUDGE_WORDS.some(w=>text.toLowerCase().includes(w)))
+    return {m:"Nudge（估算）", tag:"warn", note:"估算类问题 → 直接给带假设的答案 + 最多 3 个追问，不上五段式台账。"};
+  if(SIMPLE_WORDS.some(w=>text.includes(w)))
+    return {m:"Simple（简单）", tag:"ok", note:"简单事实问题 → 直接答，协议不触发。"};
+  return {m:"Depth（深度）", tag:"ok", note:"高利害/会执行的问题 → 走完整五段式。"};
+}
+
+function checkVerdict(text){
+  const flags=RED_FLAGS.filter(f=>text.includes(f));
+  const obs=OBS_WORDS.filter(w=>text.includes(w));
+  const route=modeRoute(text);
+  const short=text.length<18;
+  const cards=[];
+
+  // 0. red flags
+  if(flags.length){
+    cards.push({t:"红旗词检测", tag:"red", tagcls:"red",
+      body:`你的结论里出现了 <code>${esc(flags.join("</code>、<code>"))}</code>。这正是协议最警惕的词——「显然/肯定」恰恰是断言最需要证伪的地方。把它们换成可观察的表述。`});
+  }
+
+  // 1. mode route
+  cards.push({t:"模式路由 · MODE SELECTION", tag:"→ "+route.m, tagcls:route.tag,
+    body:`这个问题路由到 <b>${route.m}</b>。${route.note}`});
+
+  // 2. iron law
+  const claim=text.length>60?text.slice(0,57)+"…":text;
+  cards.push({t:"铁律 · Iron Law", tag:"核心", tagcls:"red",
+    body:`铁律：<b>没有可证伪的假设，就没有结论</b>。把「${esc(claim)}」改写成：
+      <div class="vc-model">如果 [假设] 为真，那么我应该观察到 [可测量的信号 O]。
+如果观察到 ¬O，[假设] 死亡，立即放弃。</div>`});
+
+  // 3. five-stage checklist
+  const checks=[
+    {k:"公理化", q:"事实 / 假设 / 传闻分列三张清单", ok:false},
+    {k:"假设化", q:"写成 If-H-then-O 预测，并列出 ≥3 个互斥备选（含一个你不信的）", ok:false},
+    {k:"对抗", q:"先替最强的反对者辩护（钢人化）+ 3 个失效模式", ok:false},
+    {k:"验证", q:"证据分级 + 主动找反证 + 跑最便宜的测试", ok:false},
+    {k:"收束", q:"标出置信度与剩余未知，给可核查声明", ok:false},
+  ];
+  if(obs.length>=2) checks[1].ok=true;
+  if(short) checks[1].ok=false;
+  cards.push({t:"五阶段缺失清单", tag:"缺 "+checks.filter(c=>!c.ok).length+"/5", tagcls:checks.every(c=>c.ok)?"ok":"warn",
+    list:checks.map(c=>({label:`<b>${c.k}</b> · ${c.q}`, done:c.ok}))});
+
+  // 4. rewrite model
+  cards.push({t:"改进版示范（模板）", tag:"可复制", tagcls:"ok",
+    body:`把结论升级成可证伪版本：
+      <div class="vc-model">假设 H：${esc(claim)}
+备选 A：还有别的解释（数据/环境/时序/用户行为）
+预测 O：如果 H 为真，[此处写下可测量信号] 应该出现
+判死条件：观察到 ¬O 时 H 立即死亡
+证据等级：已看到 [事实/数字] / 未验证 [假设] / 听说的 [传闻]
+置信度：___%（基于上述证据，不是感觉）</div>`});
+
+  return cards;
+}
+
+$("vc-run").addEventListener("click",()=>{
+  const text=$("vc-input").value.trim();
+  const out=$("vc-out");
+  if(!text){out.className="vc show";out.innerHTML=`<div class="vc-card"><h4><span class="tag red">空输入</span></h4><p>先写下一个你正准备下的结论，再点检查。</p></div>`;return;}
+  const cards=checkVerdict(text);
+  out.innerHTML=cards.map(c=>{
+    const list=c.list?`<ul class="vc-list">${c.list.map(l=>`<li class="${l.done?"done":""}">${l.label}</li>`).join("")}</ul>`:"";
+    return `<div class="vc-card"><h4><span class="tag ${c.tagcls||""}">${esc(c.t)}</span>${esc(c.t2||"")}</h4>${c.body?`<p>${c.body}</p>`:""}${list}</div>`;
+  }).join("")+`<p class="vc-note">检查器是模板化启发式，不是 LLM 判断——它只提醒协议要求什么。真正的执行看 SKILL.md。</p>`;
+  out.className="vc show";
+});
+$("vc-input").addEventListener("keydown",e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter")$("vc-run").click()});
+</script>
 
 </body>
 </html>
