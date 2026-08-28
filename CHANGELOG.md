@@ -1,4 +1,8 @@
 # Changelog
+## 0.8.7 (2026-08-28)
+
+- Submitted update PR to AAS: [PR #1287](https://github.com/sickn33/agentic-awesome-skills/pull/1287) — syncs the merged falsify skill to 0.8.3 (mandatory MODE SELECTION gate + Nudge routing), structure/frontmatter preserved for AAS compatibility, `validate --strict` passes
+- PR portfolio (all open): awesome-llm-apps #1124 · VoltAgent #975 · awesome-codex-skills #257 · awesome-dsh-plugin #3596 · AAS update #1287 (merged base: #1281)
 ## 0.8.6 (2026-08-28)
 
 - **Milestone: falsify is now MERGED into `sickn33/agentic-awesome-skills` (⭐45.5k)** — the maintainer repaired and merged our 8/26 contribution via PR #1281 (preserving our attribution), including companion `references/` and `templates/` files. Live in the AAS catalog (`CATALOG.md`) and installable by Codex/Claude through the AAS CLI/MCP.
