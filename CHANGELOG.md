@@ -1,4 +1,7 @@
 # Changelog
+## 0.8.4 (2026-08-29)
+
+- **Community fix from AAS PR review (P1):** high-stakes ballparks must stay in Depth mode. The unconditional Nudge default could instruct an agent to give a rough medication dose / security capacity / production sizing number without falsification. Fixed in MODE SELECTION table + Nudge routing + Nudge chapter: low-stakes reversible estimates → Nudge; anything where being wrong costs time/money/trust → Depth (gather key inputs, falsify, then commit). Version stamp 0.8.4 (npm package version unchanged at 0.8.3).
 ## 0.8.9 (2026-08-29)
 
 - Distribution round 7: [PR #88](https://github.com/JackyST0/awesome-agent-skills/pull/88) — Productivity of JackyST0/awesome-agent-skills (⭐628, EN+ZH README); [PR #10](https://github.com/theskillsdirectory/skills/pull/10) — theskills.directory registry
