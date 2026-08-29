@@ -1,4 +1,10 @@
 # Changelog
+## 0.8.9 (2026-08-29)
+
+- Distribution round 7: [PR #88](https://github.com/JackyST0/awesome-agent-skills/pull/88) — Productivity of JackyST0/awesome-agent-skills (⭐628, EN+ZH README); [PR #10](https://github.com/theskillsdirectory/skills/pull/10) — theskills.directory registry
+- Distribution round 8 (found during community exploration): [ComposioHQ/awesome-claude-skills #1738](https://github.com/ComposioHQ/awesome-claude-skills/pull/1738) (⭐73.8k) · [Prat011/awesome-llm-skills #227](https://github.com/Prat011/awesome-llm-skills/pull/227) (⭐1.7k) · [libukai/awesome-agent-skills #136](https://github.com/libukai/awesome-agent-skills/pull/136) (⭐5k, zh) — all already open; closed duplicate VoltAgent #970 (superseded by #975)
+- Portfolio: 12 open PRs across ~340k stars of exposure; AAS base merge (#1281) live; skills.sh installs 2; npm weekly 273
+- Community intel: falsification-first niche has no winner yet (88plug/scientific-method ⭐1); Tencent SkillHub (skillhub.cn, 13k+ skills) requires phone+realname to publish — needs user; agentskillsindex.com offline
 ## 0.8.8 (2026-08-28)
 
 - Distribution round 6: [PR #451](https://github.com/heilcheng/awesome-agent-skills/pull/451) — Community Skills of heilcheng/awesome-agent-skills (⭐6.1k)
