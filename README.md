@@ -35,26 +35,21 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 没有可证伪的假设，就没有结论。
 ```
 
-## Why it is grounded (not vibes)
+<p align="center">
+  <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/Try%20the%20live%20demo-%E2%86%92-111111?style=for-the-badge&logo=github" alt="Live demo"></a>
+  <img src="https://img.shields.io/badge/evals-26%2F28%20dual%2Dmodel-22b558?style=for-the-badge" alt="26/28 dual-model evals">
+  <img src="https://img.shields.io/badge/dogfood-4%2F4%20real%20community-22b558?style=for-the-badge" alt="4/4 real community">
+  <img src="https://img.shields.io/badge/listed%20in-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="Listed in AAS">
+</p>
 
-falsify is distilled from 70+ community sources and backed by academic work on
-how agents should reason:
+## What it changes
 
-- **ICML 2026** — *Agentic AI systems should be making Bayes-consistent decisions*: agent confidence should update like a Bayesian, not a salesman.
-- **Google** — *Teaching LLMs to reason like Bayesians*: calibration is learnable; agents can be trained out of overconfidence.
-- **arXiv 2507.15015 (MetaCrit)** — multi-agent critique (generate / monitor / control / meta-synthesize) is the academic skeleton of our Stage 5 multi-perspective review.
-- **UDora (ICML 2025)** — the strongest attack on a model's reasoning comes from its own inference trace; Stage 3 red-teams the reasoning chain itself.
-- **CSA Agentic AI Red Teaming Guide** — systematic red teaming as a discipline, not a vibe.
-- **arXiv 2606.19559** — separating *action-confidence* from *request-uncertainty* is how honest agents report what they do not know.
-- **CIA ACH (Heuer, *Psychology of Intelligence Analysis*)** — competitive hypothesis analysis: 3–7 mutually exclusive candidates (including one you don't believe), diagnostic evidence (count the I's, not the C's), sensitivity analysis. The professional standard for structured analytic judgment.
-- **Lakatos, *The Methodology of Scientific Research Programmes*** — the protective-belt check: patching a failing hypothesis with auxiliary assumptions is a degenerating programme, not a rescue.
-- **Mayo, *Error and the Growth of Experimental Knowledge*** — a test only counts if it would have caught a wrong hypothesis (low P(E|¬H)).
-- **Toulmin, *The Uses of Argument* / van Gelder, argument mapping** — draw the argument tree explicitly (contention → reasons → co-premises → warrant) before attacking it; the hidden co-premises are where arguments are weakest, and a flawless structure still does not make the premises true.
-- **Pearl, do-calculus / *The Book of Why*** — the causal ladder (association → intervention → counterfactual); the backdoor criterion (did you miss a confounder?) and the collider trap (conditioning on a collider creates the bias you are seeing).
-- **Reflexion (Shinn et al., NeurIPS 2023) / Huang et al. 2023 (*LLMs Cannot Self-Correct Reasoning Yet*)** — internal self-reflection is not verification: without an external signal, reflection drifts. Confidence only earns an upgrade when a test, a lookup, or an independent source changes it.
-- **Kahneman, *Thinking, Fast and Slow* / Simon, bounded rationality** — dual-process routing: low-stakes reversible questions answer fast (System 1), high-stakes or irreversible ones get the full protocol (System 2); unbounded searches satisfice against a pre-declared aspiration threshold.
-- **Galef, *The Scout Mindset* / von Neumann-Morgenstern utility** — the reversal test (would you accept the same evidence reversed?) and the bias audit catch motivated reasoning; expected-value rules (max EV / EU / minimax regret / satisficing) turn a calibrated verdict into a rational choice.
-- **Snowden, Cynefin framework / Kepner-Tregoe analysis / Boyd, OODA loop** — classify the cause–effect domain before choosing a method (wrong-domain method is the failure mode); bound selective defects with IS/IS-NOT; screen decisions with MUST/WANT plus adverse-consequence tests; act at ~70% and re-observe when the situation is moving and the move is reversible.
+| | Before (typical agent) | After (falsify) |
+|---|---|---|
+| Architecture question | Confident pro/con list → "Redis is a great fit" | Axioms → assumptions flagged → "I am 40% sure, because we have no volume data; cheapest first step is measuring, not adding Redis" |
+| Bug diagnosis | "Probably a memory leak" | Hypothesis → adversarial check (deploy window? coincidence?) → evidence → calibrated verdict + residual risk |
+| Data claim | "Yes, X is 5x faster" | Demands benchmark definition → labels claim hearsay if unverifiable → refuses to state it as fact |
+| "Is this the best approach?" | Answers "yes, it's best" | Rewrites "best" as unfalsifiable → answers "best for [criteria] under [constraints]" |
 
 ## Install
 
@@ -83,14 +78,27 @@ npm i -g falsify-skill && falsify-skill
 Or manually: clone the repo and copy `SKILL.md` into your agent's skills directory
 (`~/.codex/skills/falsify/`, `~/.claude/skills/falsify/`, `.cursor/skills/falsify/`, …).
 
-## What it changes
 
-| | Before (typical agent) | After (falsify) |
-|---|---|---|
-| Architecture question | Confident pro/con list → "Redis is a great fit" | Axioms → assumptions flagged → "I am 40% sure, because we have no volume data; cheapest first step is measuring, not adding Redis" |
-| Bug diagnosis | "Probably a memory leak" | Hypothesis → adversarial check (deploy window? coincidence?) → evidence → calibrated verdict + residual risk |
-| Data claim | "Yes, X is 5x faster" | Demands benchmark definition → labels claim hearsay if unverifiable → refuses to state it as fact |
-| "Is this the best approach?" | Answers "yes, it's best" | Rewrites "best" as unfalsifiable → answers "best for [criteria] under [constraints]" |
+## Why it is grounded (not vibes)
+
+falsify is distilled from 70+ community sources and backed by academic work on
+how agents should reason:
+
+- **ICML 2026** — *Agentic AI systems should be making Bayes-consistent decisions*: agent confidence should update like a Bayesian, not a salesman.
+- **Google** — *Teaching LLMs to reason like Bayesians*: calibration is learnable; agents can be trained out of overconfidence.
+- **arXiv 2507.15015 (MetaCrit)** — multi-agent critique (generate / monitor / control / meta-synthesize) is the academic skeleton of our Stage 5 multi-perspective review.
+- **UDora (ICML 2025)** — the strongest attack on a model's reasoning comes from its own inference trace; Stage 3 red-teams the reasoning chain itself.
+- **CSA Agentic AI Red Teaming Guide** — systematic red teaming as a discipline, not a vibe.
+- **arXiv 2606.19559** — separating *action-confidence* from *request-uncertainty* is how honest agents report what they do not know.
+- **CIA ACH (Heuer, *Psychology of Intelligence Analysis*)** — competitive hypothesis analysis: 3–7 mutually exclusive candidates (including one you don't believe), diagnostic evidence (count the I's, not the C's), sensitivity analysis. The professional standard for structured analytic judgment.
+- **Lakatos, *The Methodology of Scientific Research Programmes*** — the protective-belt check: patching a failing hypothesis with auxiliary assumptions is a degenerating programme, not a rescue.
+- **Mayo, *Error and the Growth of Experimental Knowledge*** — a test only counts if it would have caught a wrong hypothesis (low P(E|¬H)).
+- **Toulmin, *The Uses of Argument* / van Gelder, argument mapping** — draw the argument tree explicitly (contention → reasons → co-premises → warrant) before attacking it; the hidden co-premises are where arguments are weakest, and a flawless structure still does not make the premises true.
+- **Pearl, do-calculus / *The Book of Why*** — the causal ladder (association → intervention → counterfactual); the backdoor criterion (did you miss a confounder?) and the collider trap (conditioning on a collider creates the bias you are seeing).
+- **Reflexion (Shinn et al., NeurIPS 2023) / Huang et al. 2023 (*LLMs Cannot Self-Correct Reasoning Yet*)** — internal self-reflection is not verification: without an external signal, reflection drifts. Confidence only earns an upgrade when a test, a lookup, or an independent source changes it.
+- **Kahneman, *Thinking, Fast and Slow* / Simon, bounded rationality** — dual-process routing: low-stakes reversible questions answer fast (System 1), high-stakes or irreversible ones get the full protocol (System 2); unbounded searches satisfice against a pre-declared aspiration threshold.
+- **Galef, *The Scout Mindset* / von Neumann-Morgenstern utility** — the reversal test (would you accept the same evidence reversed?) and the bias audit catch motivated reasoning; expected-value rules (max EV / EU / minimax regret / satisficing) turn a calibrated verdict into a rational choice.
+- **Snowden, Cynefin framework / Kepner-Tregoe analysis / Boyd, OODA loop** — classify the cause–effect domain before choosing a method (wrong-domain method is the failure mode); bound selective defects with IS/IS-NOT; screen decisions with MUST/WANT plus adverse-consequence tests; act at ~70% and re-observe when the situation is moving and the move is reversible.
 
 ## How it works
 

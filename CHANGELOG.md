@@ -1,36 +1,36 @@
 # Changelog
+
+## Versioning policy
+
+- **版本号只代表协议本身的变化**：功能、修复、蒸馏升级才 bump（如 0.8.4 = 一个真实行为修复）。
+- **分发轮次（收录 / PR / 榜单）不占版本号**——它们改变"被看见的方式"，不改变协议本身，统一记入下方 `Distribution log`。
+- **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
+- 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
+
+## 0.8.5 (2026-08-30) — latest
+
+- **README 首屏改造（可见性升级）**：新增徽章行（在线演示 / 双模型 26/28 / 实测 4/4 / AAS ⭐45.5k 收录）；「它改变了什么」before/after 表提前到首屏；安装段前置；中英 README 结构同步；修复 zh 安装段代码围栏。
+- **版本策略落地**：见顶部 `Versioning policy`——版本号只代表协议或可见面的变化；旧的 0.8.5~0.8.9 发行轮次已合并入 `Distribution log`，不再作为独立版本。
+- **描述工程化**：GitHub + npm 描述重写（关键词前置、五段流程、双模型证据），对齐 Context7 式搜索友好文案。
+- npm: `falsify-skill@0.8.5`（GitHub Release v0.8.5 同步）。
+
 ## 0.8.4 (2026-08-29)
 
-- **Community fix from AAS PR review (P1):** high-stakes ballparks must stay in Depth mode. The unconditional Nudge default could instruct an agent to give a rough medication dose / security capacity / production sizing number without falsification. Fixed in MODE SELECTION table + Nudge routing + Nudge chapter: low-stakes reversible estimates → Nudge; anything where being wrong costs time/money/trust → Depth (gather key inputs, falsify, then commit). Version stamp 0.8.4 (npm package version unchanged at 0.8.3).
-## 0.8.9 (2026-08-29)
+- **Community fix from AAS PR review (P1):** high-stakes ballparks must stay in Depth mode. The unconditional Nudge default could instruct an agent to give a rough medication dose / security capacity / production sizing number without falsification. Fixed in MODE SELECTION table + Nudge routing + Nudge chapter: low-stakes reversible estimates → Nudge; anything where being wrong costs time/money/trust → Depth (gather key inputs, falsify, then commit).
+- npm: **`falsify-skill@0.8.4` published**（此前 npm 停在 0.8.3，该修复一直未发；此轮已对齐 GitHub Release v0.8.4 与全部版本戳）。
 
-- Distribution round 7: [PR #88](https://github.com/JackyST0/awesome-agent-skills/pull/88) — Productivity of JackyST0/awesome-agent-skills (⭐628, EN+ZH README); [PR #10](https://github.com/theskillsdirectory/skills/pull/10) — theskills.directory registry
-- Distribution round 8 (found during community exploration): [ComposioHQ/awesome-claude-skills #1738](https://github.com/ComposioHQ/awesome-claude-skills/pull/1738) (⭐73.8k) · [Prat011/awesome-llm-skills #227](https://github.com/Prat011/awesome-llm-skills/pull/227) (⭐1.7k) · [libukai/awesome-agent-skills #136](https://github.com/libukai/awesome-agent-skills/pull/136) (⭐5k, zh) — all already open; closed duplicate VoltAgent #970 (superseded by #975)
-- Portfolio: 12 open PRs across ~340k stars of exposure; AAS base merge (#1281) live; skills.sh installs 2; npm weekly 273
-- Community intel: falsification-first niche has no winner yet (88plug/scientific-method ⭐1); Tencent SkillHub (skillhub.cn, 13k+ skills) requires phone+realname to publish — needs user; agentskillsindex.com offline
-## 0.8.8 (2026-08-28)
+## Distribution log (0.8.4 era, 2026-08-28/29)
 
-- Distribution round 6: [PR #451](https://github.com/heilcheng/awesome-agent-skills/pull/451) — Community Skills of heilcheng/awesome-agent-skills (⭐6.1k)
-- PR portfolio now 6 open + 1 merged (AAS #1281): awesome-llm-apps #1124 (⭐134.7k) · AAS update #1287 (⭐45.5k) · VoltAgent #975 (⭐33k) · awesome-codex-skills #257 (⭐16k) · awesome-dsh-plugin #3596 (⭐13.3k) · heilcheng #451 (⭐6.1k)
-## 0.8.7 (2026-08-28)
+非版本轮次，仅记录分发动作（协议内容不变）：
 
-- Submitted update PR to AAS: [PR #1287](https://github.com/sickn33/agentic-awesome-skills/pull/1287) — syncs the merged falsify skill to 0.8.3 (mandatory MODE SELECTION gate + Nudge routing), structure/frontmatter preserved for AAS compatibility, `validate --strict` passes
-- PR portfolio (all open): awesome-llm-apps #1124 · VoltAgent #975 · awesome-codex-skills #257 · awesome-dsh-plugin #3596 · AAS update #1287 (merged base: #1281)
-## 0.8.6 (2026-08-28)
-
-- **Milestone: falsify is now MERGED into `sickn33/agentic-awesome-skills` (⭐45.5k)** — the maintainer repaired and merged our 8/26 contribution via PR #1281 (preserving our attribution), including companion `references/` and `templates/` files. Live in the AAS catalog (`CATALOG.md`) and installable by Codex/Claude through the AAS CLI/MCP.
-- Cleanup: closed duplicate PR #1286 opened before the merge was noticed; branch content superseded by the merged version.
-## 0.8.5 (2026-08-28)
-
-- Distribution round 4: [PR #975](https://github.com/VoltAgent/awesome-agent-skills/pull/975) — Productivity and Collaboration section of VoltAgent/awesome-agent-skills (⭐33k)
-- Distribution round 5: [PR #257](https://github.com/composio-community/awesome-codex-skills/pull/257) upgraded — moved to Meta & Utilities with dual-model 26/28 proof (composio-community/awesome-codex-skills, ⭐16k)
-- In-flight PR portfolio (total ~197k stars of exposure): awesome-llm-apps #1124 (⭐134.7k) · VoltAgent #975 (⭐33k) · awesome-codex-skills #257 (⭐16k) · awesome-dsh-plugin #3596 (⭐13.3k)
-## 0.8.4 (2026-08-28)
-
-- Distribution round 1: **skills.sh** (Vercel's official Agent Skills directory) auto-indexed falsify — live page https://skills.sh/263311487-ux/falsify, installs via `npx skills add 263311487-ux/falsify`
-- Distribution round 2: [PR #1124](https://github.com/Shubhamsaboo/awesome-llm-apps/pull/1124) — external entry in 🧩 Agent Skills of awesome-llm-apps (⭐134.7k)
-- Distribution round 3: [PR #3596](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/3596) — Skills section of awesome-dsh-plugin (⭐13.3k)
-- Cross-links: falsify ↔ dsh-verify ↔ imprint-pdf ↔ Xun READMEs now reference each other (think → verify → present workflow)
+- **Round 1–2:** [skills.sh](https://skills.sh/263311487-ux/falsify)（Vercel 官方目录）自动收录 + [PR #1124](https://github.com/Shubhamsaboo/awesome-llm-apps/pull/1124) awesome-llm-apps（⭐134.7k）
+- **Round 3:** [PR #3596](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/3596) awesome-dsh-plugin（⭐13.3k）
+- **Round 4–5:** [PR #975](https://github.com/VoltAgent/awesome-agent-skills/pull/975) VoltAgent（⭐33k）+ [PR #257](https://github.com/composio-community/awesome-codex-skills/pull/257) awesome-codex-skills 升级（⭐16k）
+- **Round 6:** [PR #451](https://github.com/heilcheng/awesome-agent-skills/pull/451) heilcheng/awesome-agent-skills（⭐6.1k）
+- **Milestone:** **MERGED into `sickn33/agentic-awesome-skills`（⭐45.5k）** via [PR #1281](https://github.com/sickn33/agentic-awesome-skills/pull/1281)（含 `references/` + `templates/`，可经 AAS CLI/MCP 安装）；同步 [PR #1287](https://github.com/sickn33/agentic-awesome-skills/pull/1287) 更新至 0.8.3；清理重复 PR #1286
+- **Round 7–8:** [PR #88](https://github.com/JackyST0/awesome-agent-skills/pull/88) JackyST0（⭐628）+ [PR #10](https://github.com/theskillsdirectory/skills/pull/10) theskills.directory + ComposioHQ/awesome-claude-skills [#1738](https://github.com/ComposioHQ/awesome-claude-skills/pull/1738)（⭐73.8k）· Prat011/awesome-llm-skills [#227](https://github.com/Prat011/awesome-llm-skills/pull/227)（⭐1.7k）· libukai/awesome-agent-skills [#136](https://github.com/libukai/awesome-agent-skills/pull/136)（⭐5k）
+- **Portfolio snapshot:** 12 open PRs across ~340k stars of exposure；skills.sh installs 2；npm weekly 273
+- **Community intel:** falsification-first niche has no winner yet（88plug/scientific-method ⭐1）；Tencent SkillHub（skillhub.cn）需手机+实名；agentskillsindex.com 已下线
 
 ## 0.8.3 (2026-08-27)
 

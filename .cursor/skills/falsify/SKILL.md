@@ -21,7 +21,7 @@ triggers:
   - phrase: "am I thinking about this right"
 license: MIT
 metadata:
-  version: "0.8.4"
+  version: "0.8.5"
 ---
 
 # Falsify — The Scientific Thinking Protocol

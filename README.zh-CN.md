@@ -34,6 +34,45 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 没有可证伪的假设，就没有结论。
 ```
 
+<p align="center">
+  <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/在线演示-%E2%86%92-111111?style=for-the-badge&logo=github" alt="在线演示"></a>
+  <img src="https://img.shields.io/badge/评测-26%2F28%20双模型-22b558?style=for-the-badge" alt="26/28 双模型">
+  <img src="https://img.shields.io/badge/实测-4%2F4%20真实社区-22b558?style=for-the-badge" alt="4/4 真实社区">
+  <img src="https://img.shields.io/badge/收录-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="收录 AAS">
+</p>
+
+## 它改变了什么
+
+|  | 之前（普通智能体） | 之后（falsify） |
+|---|---|---|
+| 架构选型 | 自信地列优缺点 → "Redis 很合适" | 先列公理 → 标注未验证假设 → "我只有 40% 把握，因为没有体量数据；最便宜的下一步是先测量，而不是加 Redis" |
+| 故障排查 | "大概是内存泄漏" | 立假设 → 对抗性检查（部署窗口？巧合？）→ 证据 → 校准结论 + 剩余风险 |
+| 数据论断 | "是的，X 快 5 倍" | 追问基准定义 → 无法验证就标注为传闻 → 拒绝当成事实陈述 |
+| "这是不是最好的方案？" | 直接答"是的，最好" | 把"最好"改写为可证伪问题 → 只回答"在[标准]与[约束]下最好" |
+
+## 安装
+
+在 CLI 提示符里复制粘贴这一句（任何支持技能的智能体通用）：
+
+```text
+Install the falsify skill from https://github.com/263311487-ux/falsify, refer to the repo's AGENTS.md for instructions.
+```
+
+或用 skills CLI：
+
+```text
+npx skills add 263311487-ux/falsify
+```
+
+或通过 npm 安装（自动把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
+
+```text
+npx falsify-skill
+```
+
+或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
+（`~/.codex/skills/falsify/`、`~/.claude/skills/falsify/`、`.cursor/skills/falsify/`……）。
+
 ## 理论根基（不是玄学）
 
 falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
@@ -53,38 +92,6 @@ falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
 - **Kahneman《思考，快与慢》/ Simon 有限理性**：双系统路由——低风险可逆的问题快速回答（系统 1），高注或不可逆的问题走完整协议（系统 2）；无边界搜索用「预先声明的满意度阈值」做满意化。
 - **Galef《侦察兵心态》/ von Neumann-Morgenstern 效用理论**：反转测试（反向证据你会接受吗？）与偏差审计抓住动机性推理；期望值决策规则（max EV / EU / minimax regret / 满意化）把校准后的结论变成理性选择。
 - **Snowden 的 Cynefin 框架 / Kepner-Tregoe 分析 / Boyd 的 OODA 循环**：选方法前先分类因果域（用错领域的方法本身就是失败模式）；选择性缺陷用 IS/IS-NOT 界定；多准则决策用 MUST 门槛 + 加权 WANT + 不利后果检验；情况在动且动作可逆时，70% 置信就行动并立即再观察。
-
-## 安装
-
-在 CLI 提示符里复制粘贴这一句（任何支持技能的智能体通用）：
-
-```text
-Install the falsify skill from https://github.com/263311487-ux/falsify, refer to the repo's AGENTS.md for instructions.
-```
-
-或用 skills CLI：
-
-```text
-npx skills add 263311487-ux/falsify
-
-或通过 npm 安装（自动把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
-
-```text
-npx falsify-skill
-```
-```
-
-或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
-（`~/.codex/skills/falsify/`、`~/.claude/skills/falsify/`、`.cursor/skills/falsify/`……）。
-
-## 它改变了什么
-
-|  | 之前（普通智能体） | 之后（falsify） |
-|---|---|---|
-| 架构选型 | 自信地列优缺点 → "Redis 很合适" | 先列公理 → 标注未验证假设 → "我只有 40% 把握，因为没有体量数据；最便宜的下一步是先测量，而不是加 Redis" |
-| 故障排查 | "大概是内存泄漏" | 立假设 → 对抗性检查（部署窗口？巧合？）→ 证据 → 校准结论 + 剩余风险 |
-| 数据论断 | "是的，X 快 5 倍" | 追问基准定义 → 无法验证就标注为传闻 → 拒绝当成事实陈述 |
-| "这是不是最好的方案？" | 直接答"是的，最好" | 把"最好"改写为可证伪问题 → 只回答"在[标准]与[约束]下最好" |
 
 ## 工作原理
 
