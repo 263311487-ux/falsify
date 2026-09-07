@@ -79,6 +79,33 @@ Or manually: clone the repo and copy `SKILL.md` into your agent's skills directo
 (`~/.codex/skills/falsify/`, `~/.claude/skills/falsify/`, `.cursor/skills/falsify/`, …).
 
 
+## Try it now (no agent required)
+
+The npm package is a **falsification coach**, not just an installer — paste any claim and it walks it through the protocol:
+
+```bash
+npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就好。"
+#       ① Red-flag words   → 显然 detected — exactly the words the protocol distrusts
+#       ② Mode routing     → Depth (high-stakes, acted-on)
+#       ③ Iron Law rewrite → if [H] then I should observe [O]; if ¬O, H is dead
+#       ④ Five-stage gap   → 5/5 missing (axiomatize → hypothesize → adversarialize → verify → converge)
+#       ⑤ Upgrade template → rivals, prediction, kill condition, evidence grade, confidence
+```
+
+Works in English too, and is scriptable:
+
+```bash
+npx falsify-skill "The API is definitely the fastest solution"
+npx falsify-skill --json "肯定是内存泄漏"     # machine-readable verdict for CI / scripts
+echo "restart fixed it, no need to dig deeper" | npx falsify-skill
+```
+
+It's a heuristic template, not an LLM judge — it reminds you what the protocol demands. The full protocol installs into your agent:
+
+```text
+npx falsify-skill --install
+```
+
 ## Why it is grounded (not vibes)
 
 falsify is distilled from 70+ community sources and backed by academic work on

@@ -73,6 +73,33 @@ npx falsify-skill
 或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
 （`~/.codex/skills/falsify/`、`~/.claude/skills/falsify/`、`.cursor/skills/falsify/`……）。
 
+## 现在就能试（不需要装进智能体）
+
+npm 包不只是「安装器」，它本身就是一个**证伪教练**——粘一句结论，它带你走完协议：
+
+```bash
+npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就好。"
+#       ① 红旗词检测   → 检测到「显然」——正是协议最警惕的词
+#       ② 模式路由     → Depth（高利害 / 会执行 → 走完整五段式）
+#       ③ 铁律改写     → 如果 [H] 为真 → 应观察到 [O]；观察到 ¬O，H 死亡
+#       ④ 五阶段缺失   → 缺 5/5（公理化 → 假设化 → 对抗 → 验证 → 收束）
+#       ⑤ 改进版示范   → 备选解释、可测预测、判死条件、证据分级、置信度
+```
+
+也支持英文，且可脚本化：
+
+```bash
+npx falsify-skill "The API is definitely the fastest solution"
+npx falsify-skill --json "肯定是内存泄漏"     # JSON 输出，供 CI / 脚本使用
+echo "restart fixed it, no need to dig deeper" | npx falsify-skill
+```
+
+它是模板化启发式，不是 LLM 判断——它只提醒你协议要求什么。完整协议装进你的智能体：
+
+```text
+npx falsify-skill --install
+```
+
 ## 理论根基（不是玄学）
 
 falsify 蒸馏自 70+ 社区来源，并有学术论文背书：

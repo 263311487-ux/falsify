@@ -1,6 +1,6 @@
 {
   "name": "falsify-skill",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "The scientific thinking protocol for AI agents — falsify before you believe. 5-stage falsification skill (axioms → hypothesis → adversarial → verify → converge) for Codex, Claude Code, Cursor, Gemini CLI & 20+ agents. Dual-model evals 26/28. 五段式科学思维协议：公理 → 假设 → 对抗 → 验证 → 收束。",
   "keywords": [
     "falsify",
@@ -12,7 +12,11 @@
     "claude",
     "prompt-engineering",
     "epistemics",
-    "reasoning"
+    "reasoning",
+    "falsification-coach",
+    "critical-thinking",
+    "debugging",
+    "thinking-tool"
   ],
   "license": "MIT",
   "author": "Bai Xing (白星) <263311487@qq.com>",

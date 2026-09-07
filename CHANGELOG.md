@@ -7,7 +7,14 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
-## 0.8.5 (2026-08-30) — latest
+## 0.8.6 (2026-09-07) — latest
+
+- **CLI 从安装器升级为「证伪教练」（核心变化）**：`npx falsify-skill "<claim>"` 直接跑协议五段检查——红旗词检测 / 模式路由 / 铁律改写 / 五阶段缺失清单 / 改进版模板；自动中英；支持 `--json`（CI/脚本）、管道输入、交互模式；`--install` 保留原安装行为。
+- **共享核心模块 `bin/falsify-core.mjs`**：纯规则启发式（无 LLM 依赖），`checkClaim()` 可被任意脚本复用。
+- **README 中英新增 "Try it now" 10 秒演示区块**：不装进 agent 也能 30 秒体验协议。
+- npm: `falsify-skill@0.8.6`（keywords +4：falsification-coach / critical-thinking / debugging / thinking-tool）。
+
+## 0.8.5 (2026-08-30)
 
 - **README 首屏改造（可见性升级）**：新增徽章行（在线演示 / 双模型 26/28 / 实测 4/4 / AAS ⭐45.5k 收录）；「它改变了什么」before/after 表提前到首屏；安装段前置；中英 README 结构同步；修复 zh 安装段代码围栏。
 - **版本策略落地**：见顶部 `Versioning policy`——版本号只代表协议或可见面的变化；旧的 0.8.5~0.8.9 发行轮次已合并入 `Distribution log`，不再作为独立版本。
