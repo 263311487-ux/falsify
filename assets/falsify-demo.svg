@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 566 675" width="100%" role="img" aria-label="falsify terminal demo">
+  <rect width="566" height="675" fill="#0d1117"/>
+  <!-- window chrome -->
+  <rect x="0" y="0" width="566" height="34" fill="#161b22"/>
+  <circle cx="16" cy="17" r="6" fill="#ff5f57"/>
+  <circle cx="34" cy="17" r="6" fill="#febc2e"/>
+  <circle cx="52" cy="17" r="6" fill="#28c840"/>
+  <text x="283" y="22" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="12" fill="#8b949e">falsify — zsh</text>
+    <text x="22" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#3fb950" font-weight="600">$ </text>
+  <text x="37" y="60" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3">npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就好。"</text>
+  <text x="22" y="85" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="600">falsify — 证伪教练</text>
+  <text x="22" y="104" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#6e7681" font-weight="400">没有可证伪的假设，就没有结论。</text>
+  <text x="22" y="123" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#30363d" font-weight="400">────────────────────────────────────────────</text>
+  <text x="22" y="148" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#f85149" font-weight="600">① 红旗词检测</text>
+  <text x="22" y="167" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   检测到：显然 —— 断言越「肯定」，越需要证伪。</text>
+  <text x="22" y="192" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="400">② 模式路由 · MODE SELECTION → Depth（深度）</text>
+  <text x="22" y="211" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   高利害/会执行的问题 → 走完整五段式。</text>
+  <text x="22" y="236" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="400">③ 铁律改写</text>
+  <text x="22" y="255" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   把「这个慢查询显然是缓存的问题，把缓存修了就好。」改写为：</text>
+  <text x="22" y="274" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#58a6ff" font-weight="400">   if [H] then I should observe [O]; if ¬O, H is dead.</text>
+  <text x="22" y="299" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="400">④ 五阶段缺失清单   缺 5/5</text>
+  <text x="22" y="318" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   ✗ 公理化 · 事实/假设/传闻分列</text>
+  <text x="22" y="337" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   ✗ 假设化 · If-H-then-O + ≥3 备选</text>
+  <text x="22" y="356" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   ✗ 对抗 · 钢人化 + 3 失效模式</text>
+  <text x="22" y="375" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   ✗ 验证 · 证据分级 + 主动找反证</text>
+  <text x="22" y="394" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   ✗ 收束 · 置信度 + 剩余未知</text>
+  <text x="22" y="419" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="400">⑤ 改进版示范（模板）</text>
+  <text x="22" y="438" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#e6edf3" font-weight="400">   假设 H：这个慢查询显然是缓存的问题，把缓存修了就好。</text>
+  <text x="22" y="457" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   备选 A：还有别的解释（数据/环境/时序/行为）</text>
+  <text x="22" y="476" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   预测 O：如果 H 为真，[可测量信号] 应出现</text>
+  <text x="22" y="495" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   判死：观察到 ¬O 时 H 死亡</text>
+  <text x="22" y="514" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#8b949e" font-weight="400">   置信度：___%（基于证据，不是感觉）</text>
+  <text x="22" y="539" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="13" fill="#6e7681" font-weight="400">提示：模板化启发式，不是 LLM 判断。完整协议见 SKILL.md。</text>
+</svg>

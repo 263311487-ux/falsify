@@ -96,6 +96,11 @@ echo "restart fixed it, no need to dig deeper" | npx falsify-skill
 
 它是模板化启发式，不是 LLM 判断——它只提醒你协议要求什么。完整协议装进你的智能体：
 
+<div align="center">
+  <img src="assets/falsify-demo.svg" alt="falsify 终端演示 —— 粘一句结论，得到五段式检查" width="85%">
+</div>
+
+
 ```text
 npx falsify-skill --install
 ```

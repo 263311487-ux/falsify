@@ -102,6 +102,11 @@ echo "restart fixed it, no need to dig deeper" | npx falsify-skill
 
 It's a heuristic template, not an LLM judge — it reminds you what the protocol demands. The full protocol installs into your agent:
 
+<div align="center">
+  <img src="assets/falsify-demo.svg" alt="falsify terminal demo — paste a claim, get the five-stage check" width="85%">
+</div>
+
+
 ```text
 npx falsify-skill --install
 ```
