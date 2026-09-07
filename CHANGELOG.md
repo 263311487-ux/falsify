@@ -7,7 +7,14 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
-## 0.8.6 (2026-09-07) — latest
+## 0.8.7 (2026-09-07) — latest
+
+- **修复 CLI 分隔线 ANSI bug**：0.8.6 在管道/非 TTY 输出时分隔线被拆成单字符行（`repeat` 内含 ANSI 前缀所致）。已修复并实测。
+- **新增 CLI 真实场景 dogfood**（`evals/dogfood-cli-20260907.md`）：home-assistant/core#181420 多人锁死"肯定是别人的门/认证 API 串号"，协议保持假设开放并指向最低成本判死实验（脱离 HA 直接请求官方 API 对照）。
+- **README 新增终端演示 SVG**（`assets/falsify-demo.svg`，由 `scripts/generate-demo-svg.mjs` 用真实 CLI 输出生成）。
+- npm: `falsify-skill@0.8.7`。
+
+## 0.8.6 (2026-09-07)
 
 - **CLI 从安装器升级为「证伪教练」（核心变化）**：`npx falsify-skill "<claim>"` 直接跑协议五段检查——红旗词检测 / 模式路由 / 铁律改写 / 五阶段缺失清单 / 改进版模板；自动中英；支持 `--json`（CI/脚本）、管道输入、交互模式；`--install` 保留原安装行为。
 - **共享核心模块 `bin/falsify-core.mjs`**：纯规则启发式（无 LLM 依赖），`checkClaim()` 可被任意脚本复用。
