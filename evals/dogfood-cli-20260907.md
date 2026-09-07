@@ -21,3 +21,5 @@ npx falsify-skill "HA 里出现的门显然都是别的用户的，这肯定是�
 **ground truth 状态**：issue 仍在调查中（2026-09-07），无官方定论。本案例展示的不是"falsify 猜中了"，而是**它在多人锁死结论时保持假设开放并指向最低成本判死实验**。
 
 *注：CLI 是模板化启发式，非 LLM 判断；完整协议见 SKILL.md。*
+
+**跟进（2026-09-07）**：以上区分方法已作为评论发到该 issue（[comment](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)），帮助 60+ 受害者用一步对照实验分离"HA 凭据串号"与"Aladdin 服务端跨租户泄漏"两个假设——非推广，纯排查帮助，文末透明披露来源。
