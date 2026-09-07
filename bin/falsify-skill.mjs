@@ -58,7 +58,7 @@ function render(r) {
   // header
   lines.push(`${C.bold}falsify — ${L("证伪教练", "falsification coach")}${C.reset}`);
   lines.push(`${C.dim}${L("没有可证伪的假设，就没有结论。", "No verdict without a falsifiable hypothesis.")}${C.reset}`);
-  lines.push(`${C.dim}─`.repeat(48) + C.reset);
+  lines.push(C.dim + "─".repeat(48) + C.reset);
 
   // 1. red flags
   if (r.redFlags.length) {
@@ -94,7 +94,7 @@ function render(r) {
   lines.push(`   ${L("证据等级：事实[ ] 假设[ ] 传闻[ ]", "Evidence grade: fact[ ] assumption[ ] hearsay[ ]")}`);
   lines.push(`   ${L("置信度：___%（基于证据，不是感觉）", "Confidence: ___% (evidence-based, not felt)")}`);
 
-  lines.push(`\n${C.dim}─`.repeat(48) + C.reset);
+  lines.push("\n" + C.dim + "─".repeat(48) + C.reset);
   lines.push(`${C.dim}${L("提示：这是模板化启发式，不是 LLM 判断。完整协议见 SKILL.md。", "Note: heuristic template, not LLM judgment. Full protocol in SKILL.md.")}${C.reset}`);
   return lines.join("\n");
 }
