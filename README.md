@@ -160,6 +160,8 @@ See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). Thr
 
 Real-community cross-validation (external dogfood) is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): 4 real questions from GitHub issues and Stack Overflow, 4/4 passed, and 3/3 cases with a known ground truth matched reality.
 
+**Confirmed in a live incident (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420) — the Aladdin garage-door leak where strangers' doors appeared in users' Home Assistant — the protocol kept two hypotheses open (local credential mix-up vs. server-side cross-tenant leak) and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) subsequently **confirmed rolling back a server-side change they suspect caused it** — the server-side hypothesis survived, the local one was excluded. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
+
 **Cross-model proof (2026-08-27, v0.8.3):** the full 28-case suite is run on **two external DeepSeek models** — not our own agent — in both directions:
 
 - `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 pass, avg 15.3/18**

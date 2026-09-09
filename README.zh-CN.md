@@ -153,6 +153,8 @@ falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
 
 真实社区交叉验证（外部 dogfood）见 [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md)：4 个来自 GitHub issue 与 Stack Overflow 的真实问题，4/4 通过，其中 3/3 有真实结论的用例判断与事实一致。
 
+**真实事故获官方证实（2026-09）**：[home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420)（Aladdin 车库门泄漏事故——陌生人门出现在用户 Home Assistant 中）期间，协议保持两个假设开放（本地凭据串号 vs 服务端跨租户泄漏）并指向一步判死实验。厂商 [Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751) 随后**确认回滚了一个疑似致错的服务端变更**——服务端假设幸存、本地假设被排除。完整记录：[evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md)。
+
 **跨模型证明（2026-08-27，v0.8.3）**：28 个用例在**两个外部 DeepSeek 模型**上双向跑通——不是我们自己的智能体：
 
 - `deepseek-reasoner` 生成 × `deepseek-chat` 判分 → **26/28 通过，均分 15.3/18**
