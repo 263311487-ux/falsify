@@ -7,7 +7,13 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
-## 0.8.7 (2026-09-07) — latest
+## 0.8.8 (2026-09-09)
+
+- **真实事故闭环 → 可复用心智模型蒸馏**：home-assistant/core#181420 经官方回滚证实为服务端跨租户数据泄漏（H2 幸存 / H1 本地凭据排除）。将该事故提炼为 5 条可复用判别模式加入 `references/mental-models.md` v0.9 additions——Boundary-Side Classification（动手前先判定缺陷在边界哪一侧：客户端 vs 服务端）/ Raw-API Discriminating Test（最低成本判死实验：绕过集成直调供应商原始 API）/ Cross-Tenant Fingerprint（"我"的症状里出现其他租户命名实体 = 共享数据集被污染的指纹）/ Provider Rollback as Natural Experiment / Exposure-Boundary Note（官方证实了但爆炸半径未证实 → 分开记录，不合并成单一结论）。
+- **README 评测区补真实事故获证文案**：官方已回滚并确认怀疑该变更（Genie，Aladdin 母公司），链接 issue #181420 与我的判别测试评论（获 1 +1）。
+- npm: `falsify-skill@0.8.8`。
+
+ (2026-09-07) — latest
 
 - **修复 CLI 分隔线 ANSI bug**：0.8.6 在管道/非 TTY 输出时分隔线被拆成单字符行（`repeat` 内含 ANSI 前缀所致）。已修复并实测。
 - **新增 CLI 真实场景 dogfood**（`evals/dogfood-cli-20260907.md`）：home-assistant/core#181420 多人锁死"肯定是别人的门/认证 API 串号"，协议保持假设开放并指向最低成本判死实验（脱离 HA 直接请求官方 API 对照）。

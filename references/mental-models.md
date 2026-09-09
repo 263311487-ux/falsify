@@ -133,3 +133,12 @@ Ask the whole open frontier in one round — numbered questions, each with a rec
 | Adverse-Consequence Test (Kepner-Tregoe) | What probability×impact downside hides behind the highest score? | 5 |
 | Systems Leverage Hierarchy | Am I intervening at the highest feasible level (goals → rules → loops → structure → params)? | 1/3 |
 | Bias Catalog Index | Which of the 25 biases is active, and what is its detection question + remediation? | 4 |
+
+## v0.9 additions (boundary classification / discriminating tests / provider natural experiments)
+| Model | Question it answers | Stage |
+|---|---|---|
+| Boundary-Side Classification | Is the defect on the client side of the boundary I control (my credentials/integration), or the provider/upstream side (their data, their tenant isolation)? Name the platform domain before touching code. | 1 |
+| Raw-API Discriminating Test | What does the suspected provider return when I call its raw API directly (no integration, no auth layer)? Cheapest single call that separates an integration bug from an upstream bug. | 2 |
+| Cross-Tenant Fingerprint | Do "my" symptoms contain artifacts that could only exist if the dataset is shared or polluted (e.g., other users' named devices/addresses in my list)? | 4 |
+| Provider Rollback as Natural Experiment | The provider rolled back the suspected change — did the symptom clear, and what does that confirm vs. leave open (exposure extent, command impact)? | 4 |
+| Exposure-Boundary Note | When the provider confirms fault but not blast radius, record the confirmed claim separately from the unconfirmed extent instead of merging them into one verdict. | 5 |
