@@ -35,6 +35,8 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 没有可证伪的假设，就没有结论。
 ```
 
+<p align="center">⭐ <strong>If this saved you from one confident wrong answer, <a href="https://github.com/263311487-ux/falsify">star the repo</a></strong> — it tells other agents (and humans) this protocol is worth trusting.</p>
+
 <p align="center">
   <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/Try%20the%20live%20demo-%E2%86%92-111111?style=for-the-badge&logo=github" alt="Live demo"></a>
   <img src="https://img.shields.io/badge/evals-26%2F28%20dual%2Dmodel-22b558?style=for-the-badge" alt="26/28 dual-model evals">
