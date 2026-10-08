@@ -25,7 +25,7 @@
 
 ---
 
-**falsify（证伪引擎）** 是一个单 Markdown 技能，给任何 AI 智能体（Codex、Claude Code、DeepSeek Harness、Cursor、Gemini CLI……）装上一套五段式科学思维协议，阻止它在无法自证可被推翻的情况下给出自信结论。
+**falsify（证伪引擎）** 是一个单 Markdown 技能，给任何 AI 智能体（Codex、Claude Code、DeepSeek Harness、Cursor、Gemini CLI……）装上一套五段式科学思维协议，提醒它检查自信结论；提示协议不能保证推理正确。
 
 **铁律：**
 
@@ -38,10 +38,20 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 
 <p align="center">
   <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/在线演示-%E2%86%92-111111?style=for-the-badge&logo=github" alt="在线演示"></a>
-  <img src="https://img.shields.io/badge/评测-26%2F28%20双模型-22b558?style=for-the-badge" alt="26/28 双模型">
+  <img src="https://img.shields.io/badge/评测-历史记录%2026%2F28-6b7280?style=for-the-badge" alt="历史记录 26/28">
   <img src="https://img.shields.io/badge/实测-4%2F4%20真实社区-22b558?style=for-the-badge" alt="4/4 真实社区">
   <img src="https://img.shields.io/badge/收录-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="收录 AAS">
 </p>
+
+## 先试教练：无需 API 密钥
+
+需要 Node.js 16 或更新版本。命令在本地运行，不调用模型、不安装智能体技能：
+
+```bash
+npx falsify-skill "这个缓存肯定是故障原因"
+```
+
+它是检查清单，不是裁决或已经完成的验证。
 
 ## 它改变了什么
 
@@ -69,7 +79,7 @@ npx skills add 263311487-ux/falsify
 或通过 npm 安装（自动把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
 
 ```text
-npx falsify-skill
+npx falsify-skill --install
 ```
 
 或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
@@ -93,7 +103,7 @@ npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就�
 ```bash
 npx falsify-skill "The API is definitely the fastest solution"
 npx falsify-skill --json "肯定是内存泄漏"     # JSON 输出，供 CI / 脚本使用
-echo "restart fixed it, no need to dig deeper" | npx falsify-skill
+echo "restart fixed it, no need to dig deeper" | npx falsify-skill --install
 ```
 
 它是模板化启发式，不是 LLM 判断——它只提醒你协议要求什么。完整协议装进你的智能体：
@@ -157,12 +167,14 @@ falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
 
 **真实事故获官方证实（2026-09）**：[home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420)（Aladdin 车库门泄漏事故——陌生人门出现在用户 Home Assistant 中）期间，协议保持两个假设开放（本地凭据串号 vs 服务端跨租户泄漏）并指向一步判死实验。厂商 [Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751) 随后**确认回滚了一个疑似致错的服务端变更**——服务端假设幸存、本地假设被排除。完整记录：[evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md)。
 
-**跨模型证明（2026-08-27，v0.8.3）**：28 个用例在**两个外部 DeepSeek 模型**上双向跑通——不是我们自己的智能体：
+**历史跨模型结果（运行日期 2026-08-26，记录日期 2026-08-27）**：28 个用例在两个外部 DeepSeek 模型上双向运行。这是有日期的观察，不是证明，也不保证正确性：
 
 - `deepseek-reasoner` 生成 × `deepseek-chat` 判分 → **26/28 通过，均分 15.3/18**
 - `deepseek-chat` 生成 × `deepseek-reasoner` 判分 → **26/28 通过，均分 16.4/18**
 
-两轮失败用例互不相交（reasoner：3/9；chat：6/22），且每个失败用例都手动重生成复核为协议合规——失败是单次生成/判分波动，不是协议稳定缺口。本轮还修复了 reasoner 暴露的真实路由缺口（生产事故必须 ~70% 置信度先行动，而不是跑完整协议），通过强制的 MODE SELECTION 门实现。单命令复现：`DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`。报告：[evals/results/deepseek-reasoner-2026-08-27.md](evals/results/deepseek-reasoner-2026-08-27.md) · [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md)。
+报告包含失败和定性手动复核。手动重试**不能证明**原失败只是采样波动，也不能证明协议没有稳定缺口。配对基线、预注册多随机种子、留出用例和可复现原始响应是未来要求，目前仓库没有这些证据。复现需要外部密钥：`DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`。溯源：[evals/provenance.json](evals/provenance.json)；失败边界：[docs/failure-cases.md](docs/failure-cases.md)；报告：[reasoner](evals/results/deepseek-reasoner-2026-08-27.md) · [chat](evals/results/deepseek-chat-2026-08-27-final.md)。
+
+本技能是指导性提示协议，不保证推理正确。随附 CLI 是确定性启发式教练，不是 LLM 判分器。
 
 > **部署注意（reasoner 类模型）**：`reasoning_content` 与 `content` 共享 `max_tokens` 预算；在非常深的调试问题上，reasoner 可能把全部预算花在推理上并返回**空回复**（6k–16k token 均观察到）。请设置充足的 `max_tokens`、加空回复重试策略，或对延迟敏感场景优先用 `deepseek-chat`。
 

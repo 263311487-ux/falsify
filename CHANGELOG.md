@@ -7,6 +7,11 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
+## 0.8.9 (2026-10-08)
+
+- Safer deterministic CLI, no-key coach path, and refusal to overwrite existing or symlinked skill destinations.
+- Historical eval claims now point to provenance and failure-limit notes; manual retries are not presented as proof of variance, and the skill is not presented as a correctness guarantee.
+
 ## 0.8.8 (2026-09-09)
 
 - **真实事故闭环 → 可复用心智模型蒸馏**：home-assistant/core#181420 经官方回滚证实为服务端跨租户数据泄漏（H2 幸存 / H1 本地凭据排除）。将该事故提炼为 5 条可复用判别模式加入 `references/mental-models.md` v0.9 additions——Boundary-Side Classification（动手前先判定缺陷在边界哪一侧：客户端 vs 服务端）/ Raw-API Discriminating Test（最低成本判死实验：绕过集成直调供应商原始 API）/ Cross-Tenant Fingerprint（"我"的症状里出现其他租户命名实体 = 共享数据集被污染的指纹）/ Provider Rollback as Natural Experiment / Exposure-Boundary Note（官方证实了但爆炸半径未证实 → 分开记录，不合并成单一结论）。
@@ -162,3 +167,9 @@
 - Evals: 5 cases + 18-point rubric with Iron Law gate
 - Distribution: Claude Code, Codex, Cursor, OpenCode, Grok, Devin, agents marketplace
 - i18n: English + 简体中文
+
+## 0.8.9 (2026-10-08)
+
+- Safer deterministic CLI: explicit option parsing, JSON/stdin/help behavior, whole-word English matching, and lightweight routes that do not imply a completed reasoning ledger.
+- `--install` now preflights both destinations, refuses existing or symlinked skill directories, and copies bundled references/templates without overwriting user files.
+- Historical 26/28 results are now qualified in the README and provenance manifest: manual rechecks do not establish variance, and the skill is guidance rather than a correctness guarantee.

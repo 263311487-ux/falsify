@@ -39,10 +39,20 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 
 <p align="center">
   <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/Try%20the%20live%20demo-%E2%86%92-111111?style=for-the-badge&logo=github" alt="Live demo"></a>
-  <img src="https://img.shields.io/badge/evals-26%2F28%20dual%2Dmodel-22b558?style=for-the-badge" alt="26/28 dual-model evals">
+  <img src="https://img.shields.io/badge/evals-historical%2026%2F28-6b7280?style=for-the-badge" alt="Historical 26/28 evals">
   <img src="https://img.shields.io/badge/dogfood-4%2F4%20real%20community-22b558?style=for-the-badge" alt="4/4 real community">
   <img src="https://img.shields.io/badge/listed%20in-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="Listed in AAS">
 </p>
+
+## Try the coach first — no API key
+
+Requires Node.js 16 or newer. This runs locally without a model call or installing agent skills:
+
+```bash
+npx falsify-skill "The cache is definitely the cause"
+```
+
+The output is a checklist, not a verdict or completed test. From a checkout: `node bin/falsify-skill.mjs "The cache is definitely the cause"`.
 
 ## What it changes
 
@@ -70,11 +80,11 @@ npx skills add 263311487-ux/falsify
 Or from npm (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
 
 ```text
-npx falsify-skill
+npx falsify-skill --install
 ```
 
 ```text
-npm i -g falsify-skill && falsify-skill
+npm i -g falsify-skill && falsify-skill --install
 ```
 
 Or manually: clone the repo and copy `SKILL.md` into your agent's skills directory
@@ -99,7 +109,7 @@ Works in English too, and is scriptable:
 ```bash
 npx falsify-skill "The API is definitely the fastest solution"
 npx falsify-skill --json "肯定是内存泄漏"     # machine-readable verdict for CI / scripts
-echo "restart fixed it, no need to dig deeper" | npx falsify-skill
+echo "restart fixed it, no need to dig deeper" | npx falsify-skill --install
 ```
 
 It's a heuristic template, not an LLM judge — it reminds you what the protocol demands. The full protocol installs into your agent:
@@ -164,12 +174,14 @@ Real-community cross-validation (external dogfood) is documented in [evals/dogfo
 
 **Confirmed in a live incident (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420) — the Aladdin garage-door leak where strangers' doors appeared in users' Home Assistant — the protocol kept two hypotheses open (local credential mix-up vs. server-side cross-tenant leak) and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) subsequently **confirmed rolling back a server-side change they suspect caused it** — the server-side hypothesis survived, the local one was excluded. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
 
-**Cross-model proof (2026-08-27, v0.8.3):** the full 28-case suite is run on **two external DeepSeek models** — not our own agent — in both directions:
+**Historical cross-model result (runs dated 2026-08-26, recorded 2026-08-27):** the full 28-case suite was run on two external DeepSeek models in both directions. These are dated observations, not a proof or correctness guarantee:
 
 - `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 pass, avg 15.3/18**
 - `deepseek-chat` generator × `deepseek-reasoner` judge → **26/28 pass, avg 16.4/18**
 
-The two rounds fail on disjoint cases (reasoner: 3/9; chat: 6/22); each failing case was regenerated manually and produced protocol-compliant output, so the failures are single-run variance, not stable protocol gaps. This round also fixed a real routing gap the reasoner exposed (live incidents must act at ~70% confidence, not run the full protocol) via a mandatory MODE SELECTION gate. Reproduce in one command: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`. Reports: [evals/results/deepseek-reasoner-2026-08-27.md](evals/results/deepseek-reasoner-2026-08-27.md) · [evals/results/deepseek-chat-2026-08-27-final.md](evals/results/deepseek-chat-2026-08-27-final.md).
+The reports include failures and qualitative manual re-checks. A manual retry does **not** establish that an original failure was sampling variance, nor does it establish that the protocol has no stable gap. Paired baselines, pre-registered multiple seeds, held-out cases, and raw reproducible responses are future requirements, not present evidence. Reproduce only with the required external key: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`. Provenance: [evals/provenance.json](evals/provenance.json) · failure cases and limits: [docs/failure-cases.md](docs/failure-cases.md) · reports: [reasoner](evals/results/deepseek-reasoner-2026-08-27.md) · [chat](evals/results/deepseek-chat-2026-08-27-final.md).
+
+The skill is guidance and a prompt protocol, not a guarantee of correct reasoning. The bundled CLI is a deterministic heuristic coach, not an LLM judge.
 
 > **Deployment note (reasoner-class models):** `reasoning_content` and `content` share the `max_tokens` budget; on very deep debugging questions the reasoner can spend the entire budget on reasoning and return **empty content** (observed at 6k–16k tokens). Set a generous `max_tokens`, add a retry-on-empty policy, or prefer `deepseek-chat` for latency-constrained deployments.
 

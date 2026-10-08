@@ -1,7 +1,7 @@
 {
   "name": "falsify-skill",
-  "version": "0.8.8",
-  "description": "The scientific thinking protocol for AI agents — falsify before you believe. 5-stage falsification skill (axioms → hypothesis → adversarial → verify → converge) for Codex, Claude Code, Cursor, Gemini CLI & 20+ agents. Dual-model evals 26/28. 五段式科学思维协议：公理 → 假设 → 对抗 → 验证 → 收束。",
+  "version": "0.8.9",
+  "description": "The scientific thinking protocol for AI agents — falsify before you believe. A heuristic coach and five-stage skill (axioms → hypothesis → adversarial → verify → converge), with dated, source-linked historical eval reports; it is guidance, not a guarantee of correct reasoning.",
   "keywords": [
     "falsify",
     "falsification",
@@ -34,6 +34,7 @@
     "templates",
     "evals",
     "bin",
+    "tests",
     "docs",
     "assets"
   ],
@@ -47,5 +48,9 @@
   },
   "bugs": {
     "url": "https://github.com/263311487-ux/falsify/issues"
+  },
+  "scripts": {
+    "test": "node tests/regression.mjs",
+    "test:package": "node tests/package-smoke.mjs"
   }
 }

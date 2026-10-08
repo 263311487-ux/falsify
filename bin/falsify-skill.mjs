@@ -6,17 +6,17 @@
 //   falsify-skill --install          → install SKILL.md into agent skill directories
 //   falsify-skill --demo             → run through the built-in examples
 
-import { mkdirSync, copyFileSync, readFileSync } from "node:fs";
+import { mkdirSync, copyFileSync, readFileSync, lstatSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createInterface } from "node:readline";
-import { checkClaim, modeRoute } from "./falsify-core.mjs";
+import { checkClaim } from "./falsify-core.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const skillSrc = join(__dirname, "..", "SKILL.md");
 
-const NO_COLOR = process.env.NO_COLOR || process.argv.includes("--no-color");
+const NO_COLOR = Object.prototype.hasOwnProperty.call(process.env, "NO_COLOR") || !process.stdout.isTTY || process.argv.includes("--no-color");
 const C = NO_COLOR
   ? { reset: "", dim: "", red: "", green: "", yellow: "", cyan: "", bold: "" }
   : { reset: "\x1b[0m", dim: "\x1b[2m", red: "\x1b[31m", green: "\x1b[32m", yellow: "\x1b[33m", cyan: "\x1b[36m", bold: "\x1b[1m" };
@@ -34,19 +34,38 @@ function install() {
     { label: "Codex", dir: join(homedir(), ".codex", "skills", "falsify") },
     { label: "Claude Code", dir: join(homedir(), ".claude", "skills", "falsify") },
   ];
-  let installed = 0;
-  for (const t of targets) {
-    try {
-      mkdirSync(t.dir, { recursive: true });
-      copyFileSync(skillSrc, join(t.dir, "SKILL.md"));
-      console.log(`✔ installed falsify → ${t.label} (${join(t.dir, "SKILL.md")})`);
-      installed++;
-    } catch (e) {
-      console.log(`✖ ${t.label}: ${e.message}`);
+  try {
+    // Preflight both destinations before writing; preserve existing user skills.
+    for (const t of targets) {
+      let current = t.dir;
+      while (current !== homedir() && current !== dirname(current)) {
+        try {
+          const stat = lstatSync(current);
+          if (stat.isSymbolicLink()) throw new Error("symlink destination: " + current);
+          if (current === t.dir) throw new Error("already exists: " + current + "; move it aside before installing");
+        } catch (e) { if (e.code !== "ENOENT") throw e; }
+        current = dirname(current);
+      }
     }
+    function copyTree(src, dest) {
+      mkdirSync(dest, { recursive: true });
+      for (const item of readdirSync(src, { withFileTypes: true })) {
+        const from = join(src, item.name), to = join(dest, item.name);
+        if (item.isDirectory()) copyTree(from, to);
+        else copyFileSync(from, to, 1); // COPYFILE_EXCL
+      }
+    }
+    for (const t of targets) {
+      mkdirSync(t.dir, { recursive: true });
+      copyFileSync(skillSrc, join(t.dir, "SKILL.md"), 1);
+      for (const dir of ["references", "templates"]) copyTree(join(__dirname, "..", dir), join(t.dir, dir));
+      console.log(`✔ installed falsify → ${t.label} (${join(t.dir, "SKILL.md")})`);
+    }
+    console.log("\nfalsify is ready. Trigger it with: 先别急着下结论 / falsify this / doubt check");
+  } catch (e) {
+    console.error("Installation failed: " + e.message);
+    process.exitCode = 1;
   }
-  if (installed === 0) process.exit(1);
-  console.log("\nfalsify is ready. Trigger it with: 先别急着下结论 / falsify this / doubt check");
 }
 
 function render(r) {
@@ -70,6 +89,11 @@ function render(r) {
   // 2. mode route
   lines.push(`\n② ${L("模式路由 · MODE SELECTION", "Mode routing · MODE SELECTION")} → ${C.cyan}${r.route}${C.reset}`);
   lines.push(`   ${C.dim}${zh ? r.routeNoteZh : r.routeNoteEn}${C.reset}`);
+
+  if (!r.route.startsWith("Depth")) {
+    lines.push(L("提示：关键词路由只是提示，请核对实际情境；不会生成事实答案。", "Note: keyword routing is only a hint; check the context. This coach does not answer factual questions."));
+    return lines.join("\n");
+  }
 
   // 3. iron law rewrite
   const cut = claim.length > 70 ? claim.slice(0, 67) + "…" : claim;
@@ -115,40 +139,33 @@ async function interactive() {
   }
 }
 
-// ---- entry ----
-const args = process.argv.slice(2);
-if (args.includes("--install")) {
-  install();
-} else if (args.includes("--demo")) {
-  const demos = [
-    "这个慢查询显然是缓存的问题，把缓存修了就好。",
-    "The new feature is definitely working, user feedback is all positive.",
-    "API 肯定扛得住 10 万并发，架构很成熟。",
-  ];
-  for (const d of demos) {
-    console.log(render(checkClaim(d)));
-    console.log("\n");
+const HELP = "Usage: falsify-skill [--json] [--no-color] [--] <claim>\n  Omit claim to read stdin (or interactive terminal).\n  --demo     Local examples, no API key\n  --install  Install skill + resources; refuses existing destinations\n  --help     Show this help";
+async function main() {
+  const flags = new Set(), words = [];
+  let literal = false;
+  for (const arg of process.argv.slice(2)) {
+    if (arg === "--" && !literal) { literal = true; continue; }
+    if (!literal && arg.startsWith("--")) {
+      if (!["--help", "--json", "--install", "--demo", "--no-color"].includes(arg)) throw new Error("Unknown option: " + arg);
+      flags.add(arg);
+    } else words.push(arg);
   }
-} else if (args.includes("--json")) {
-  const i = args.indexOf("--json");
-  const claim = args[i + 1] || "";
-  if (!claim) { console.error("usage: falsify-skill --json \"<claim>\""); process.exit(1); }
-  process.stdout.write(JSON.stringify(checkClaim(claim), null, 2) + "\n");
-} else {
-  const claim = args.filter(a => !a.startsWith("--")).join(" ").trim();
-  if (claim) {
-    console.log(render(checkClaim(claim)));
-  } else if (!process.stdin.isTTY && !args.length) {
-    // piped input: read stdin
-    let buf = "";
-    process.stdin.setEncoding("utf8");
-    process.stdin.on("data", c => (buf += c));
-    process.stdin.on("end", () => {
-      const t = buf.trim();
-      if (t) console.log(render(checkClaim(t)));
-      else console.error("empty input");
-    });
-  } else {
-    interactive();
+  const modes = ["--help", "--json", "--install", "--demo"].filter(f => flags.has(f));
+  if (modes.length > 1) throw new Error("Choose only one of --help, --json, --install, --demo");
+  if (modes.some(f => f !== "--json") && words.length) throw new Error("This option does not accept a claim");
+  if (flags.has("--help")) { console.log(HELP); return; }
+  if (flags.has("--install")) { install(); return; }
+  if (flags.has("--demo")) {
+    for (const claim of ["这个慢查询显然是缓存的问题，把缓存修了就好。", "The new feature is definitely working", "API 肯定扛得住 10 万并发"]) console.log(render(checkClaim(claim)));
+    return;
   }
+  let claim = words.join(" ").trim();
+  if (!claim && !process.stdin.isTTY) claim = readFileSync(0, "utf8").trim();
+  if (!claim) {
+    if (flags.has("--json") || !process.stdin.isTTY) throw new Error("empty input: provide a claim as an argument or on stdin");
+    await interactive(); return;
+  }
+  const result = checkClaim(claim);
+  console.log(flags.has("--json") ? JSON.stringify(result, null, 2) : render(result));
 }
+main().catch(e => { console.error(e.message); process.exitCode = 1; });

@@ -16,25 +16,36 @@ export const INCIDENT_WORDS = ["事故", "宕机", "线上", "生产", "崩溃",
 export const NUDGE_WORDS = ["大概", "约", "粗略", "估算", "差不多", "ballpark", "rough", "approximately", "about how much"];
 export const SIMPLE_WORDS = ["几点", "现在时间", "天气", "是谁", "哪年", "what time", "weather", "who is"];
 
+// English keywords match whole words; Chinese keywords remain substring hints.
+function mentions(text, word) {
+  if (/^[a-z ]+$/i.test(word)) {
+    const pattern = word === "degrad" ? "degrad[a-z]*" : word;
+    return new RegExp("\\b" + pattern + "\\b", "i").test(text);
+  }
+  return text.includes(word);
+}
+
 function langOf(text) {
   return /[\u4e00-\u9fff]/.test(text) ? "zh" : "en";
 }
 
 export function modeRoute(text) {
   const t = text.toLowerCase();
-  if (INCIDENT_WORDS.some(w => t.includes(w)))
+  const estimate = NUDGE_WORDS.some(w => mentions(t, w));
+  const highStakes = /medication|dose|medical|security|production|药物|剂量|医疗|安全|生产/.test(t);
+  if (!(estimate && highStakes) && INCIDENT_WORDS.some(w => mentions(t, w)))
     return {
       mode: "Incident（事故）",
       zh: "线上事故 → 先以 ~70% 置信度做可逆操作稳住，再证伪效果。协议禁止在事故里先跑完整分析。",
       en: "Live incident → stabilize first with a reversible move at ~70% confidence, then verify. The protocol forbids running the full analysis mid-incident.",
     };
-  if (NUDGE_WORDS.some(w => t.includes(w)))
+  if (estimate && !highStakes)
     return {
       mode: "Nudge（估算）",
       zh: "估算类问题 → 直接给带假设的答案 + 最多 3 个追问，不上五段式台账。",
       en: "Rough estimate → answer directly with its stated assumption plus ≤3 questions. No five-stage ledger.",
     };
-  if (SIMPLE_WORDS.some(w => t.includes(w)))
+  if (SIMPLE_WORDS.some(w => mentions(t, w)))
     return {
       mode: "Simple（简单）",
       zh: "简单事实问题 → 直接答，协议不触发。",
@@ -50,13 +61,13 @@ export function modeRoute(text) {
 export function checkClaim(text) {
   const lang = langOf(text);
   const t = text.toLowerCase();
-  const flags = RED_FLAGS.filter(w => t.includes(w));
-  const obs = OBS_WORDS.filter(w => t.includes(w));
+  const flags = RED_FLAGS.filter(w => mentions(t, w));
+  const obs = OBS_WORDS.filter(w => mentions(t, w));
   const route = modeRoute(text);
   const short = text.trim().length < 12;
   const checks = [
     { key: "axiomatize", done: false },
-    { key: "hypothesize", done: obs.length >= 2 && !short },
+    { key: "hypothesize", done: false },
     { key: "adversarialize", done: false },
     { key: "verify", done: false },
     { key: "converge", done: false },
