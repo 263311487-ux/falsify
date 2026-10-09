@@ -78,7 +78,7 @@ Install the falsify skill from https://github.com/263311487-ux/falsify, refer to
 npx skills add 263311487-ux/falsify
 ```
 
-或从本地候选 checkout 明确安装（把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
+或从本地源码 checkout 明确安装（把 `SKILL.md` 装进 Codex 和 Claude Code 的技能目录）：
 
 ```text
 node bin/falsify-skill.mjs --install

@@ -79,7 +79,7 @@ Or with the skills CLI:
 npx skills add 263311487-ux/falsify
 ```
 
-Or explicitly from this candidate checkout (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
+Or explicitly from a source checkout (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
 
 ```text
 node bin/falsify-skill.mjs --install
