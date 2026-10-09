@@ -44,7 +44,7 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
   <img src="https://img.shields.io/badge/listed%20in-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="Listed in AAS">
 </p>
 
-Candidate 0.8.9: commands below run from this local checkout; npm may still serve an older version without these protections. Package this checkout with npm pack, then install the resulting falsify-skill-0.8.9.tgz into a fresh temporary prefix. No API key or model call is needed. See [candidate first success](docs/first-success.md).
+Version 0.8.9 was published on 2026-10-09. Try `npx falsify-skill@0.8.9 --json "Check this claim"` without a model key. The commands below also work from a source checkout. See [first success](docs/first-success.md).
 
 ## Try the coach first — no API key
 

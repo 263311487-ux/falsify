@@ -7,7 +7,7 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
-## 0.8.9 (candidate, 2026-10-09)
+## 0.8.9 (2026-10-09)
 
 - Final regressions: explicit outage cues retain Incident priority during recovery estimates while production sizing remains Depth; all installation ancestors are preflighted before any target write; provenance checks remain active under optimized Python.
 

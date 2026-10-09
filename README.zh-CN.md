@@ -43,7 +43,7 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
   <img src="https://img.shields.io/badge/收录-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="收录 AAS">
 </p>
 
-候选 0.8.9：下文命令从本地 checkout 执行；npm 旧版不承接本次安全保障。先 npm pack，再将 falsify-skill-0.8.9.tgz 安装到新的临时目录。无需密钥或模型调用。见[候选版首次运行](docs/first-success.md)。
+0.8.9 已于 2026-10-09 发布。可直接运行 `npx falsify-skill@0.8.9 --json "检查这个主张"`，无需模型密钥。下文也提供源码 checkout 命令。见[首次运行](docs/first-success.md)。
 
 ## 先试教练：无需 API 密钥
 
