@@ -17,11 +17,7 @@ jobs:
         run: grep -q "npx skills add" README.md && echo "README install OK"
       - name: Deterministic core and CLI regression tests
         run: node tests/regression.mjs
+      - name: Validate historical report provenance
+        run: python3 .github/check_provenance.py
       - name: Isolated package smoke test
-        run: |
-          tmp="$(mktemp -d)"
-          npm pack --pack-destination "$tmp" >/dev/null
-          mkdir "$tmp/install" && cd "$tmp/install"
-          npm init -y >/dev/null 2>&1
-          npm install "$tmp"/*.tgz >/dev/null
-          node -e "const {spawnSync}=require('node:child_process'); const r=spawnSync('npx',['--no-install','falsify-skill','--json','🧪 check'],{encoding:'utf8'}); if(r.status||!JSON.parse(r.stdout).claim) process.exit(1)"
+        run: npm run test:package

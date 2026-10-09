@@ -18,7 +18,7 @@
 - **README 评测区补真实事故获证文案**：官方已回滚并确认怀疑该变更（Genie，Aladdin 母公司），链接 issue #181420 与我的判别测试评论（获 1 +1）。
 - npm: `falsify-skill@0.8.8`。
 
- (2026-09-07) — latest
+## 0.8.7 (2026-09-07)
 
 - **修复 CLI 分隔线 ANSI bug**：0.8.6 在管道/非 TTY 输出时分隔线被拆成单字符行（`repeat` 内含 ANSI 前缀所致）。已修复并实测。
 - **新增 CLI 真实场景 dogfood**（`evals/dogfood-cli-20260907.md`）：home-assistant/core#181420 多人锁死"肯定是别人的门/认证 API 串号"，协议保持假设开放并指向最低成本判死实验（脱离 HA 直接请求官方 API 对照）。
@@ -59,7 +59,7 @@
 
 ## 0.8.3 (2026-08-27)
 
-- Second-model validation: full 28-case suite run on **deepseek-reasoner** (judge: deepseek-chat) → **26/28, avg 15.3/18**; cross-checked with deepseek-chat generator × deepseek-reasoner judge → **26/28, avg 16.4/18**. Failures are disjoint and each was manually re-checked as protocol-compliant (single-run variance, not stable gaps). Report: `evals/results/deepseek-reasoner-2026-08-27.md`
+- Second-model validation: full 28-case suite run on **deepseek-reasoner** (judge: deepseek-chat) → **26/28, avg 15.3/18**; cross-checked with deepseek-chat generator × deepseek-reasoner judge → **26/28, avg 16.4/18**. Failures are disjoint and each was manually re-checked as protocol-compliant (qualitative retries do not establish variance or exclude stable gaps). Report: `evals/results/deepseek-reasoner-2026-08-27.md`
 - Eval harness hardened for reasoner-class models: 8000 max_tokens on generation, retry-on-empty-content (reasoning_content shares the budget), degenerate generations marked instead of silently scored 0
 - Fairer Stage-0 scoring: judge outputs `stage0` (refuse-to-conclude is the primary behavior); such answers pass on Iron Law + no anti-pattern instead of needing all six dimensions
 - Protocol fix: mandatory **MODE SELECTION** gate (Incident / Simple / Nudge / Question / Depth) before the five stages — reasoner once ran the full protocol on a live incident instead of acting at ~70% confidence (case 26); now routes correctly
@@ -167,9 +167,3 @@
 - Evals: 5 cases + 18-point rubric with Iron Law gate
 - Distribution: Claude Code, Codex, Cursor, OpenCode, Grok, Devin, agents marketplace
 - i18n: English + 简体中文
-
-## 0.8.9 (2026-10-08)
-
-- Safer deterministic CLI: explicit option parsing, JSON/stdin/help behavior, whole-word English matching, and lightweight routes that do not imply a completed reasoning ledger.
-- `--install` now preflights both destinations, refuses existing or symlinked skill directories, and copies bundled references/templates without overwriting user files.
-- Historical 26/28 results are now qualified in the README and provenance manifest: manual rechecks do not establish variance, and the skill is guidance rather than a correctness guarantee.

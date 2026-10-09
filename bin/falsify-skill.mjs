@@ -102,7 +102,7 @@ function render(r) {
   lines.push(`   ${C.dim}  if [H] then I should observe [O]; if ¬O, H is dead.${C.reset}`);
 
   // 4. five-stage checklist
-  lines.push(`\n④ ${L("五阶段缺失清单", "Five-stage gap check")} ${C.yellow}${L(`缺 ${r.missingCount}/5`, `${r.missingCount}/5 missing`)}${C.reset}`);
+  lines.push(`\n④ ${L("五阶段待核查提示", "Five-stage prompts (not verified)")} ${C.yellow}${L(`缺 ${r.missingCount}/5`, `${r.missingCount}/5 missing`)}${C.reset}`);
   for (const s of r.fiveStages) {
     const st = STAGES[s.key];
     const mark = s.done ? `${C.green}✓${C.reset}` : `${C.red}✗${C.reset}`;

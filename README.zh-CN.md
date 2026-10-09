@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/social-preview.png" alt="falsify — AI 科学思维协议" width="100%">
+  <img src="docs/social-preview.svg" alt="falsify — AI 科学思维协议" width="100%">
 </div>
 
 <h1 align="center">falsify · 证伪引擎</h1>
@@ -82,7 +82,7 @@ npx skills add 263311487-ux/falsify
 npx falsify-skill --install
 ```
 
-或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
+安装器拒绝已有技能目录和符号链接路径，请先检查并移开旧副本。手动安装也须复制 references/ 和 templates/。或手动：克隆本仓库，把 `SKILL.md` 复制进你的智能体技能目录
 （`~/.codex/skills/falsify/`、`~/.claude/skills/falsify/`、`.cursor/skills/falsify/`……）。
 
 ## 现在就能试（不需要装进智能体）
@@ -157,7 +157,7 @@ falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
 - **前沿提问术**：需要用户输入时，一轮问完整个开放前沿，每题附推荐答案，不搞逐个盘问；能自己查的绝不问用户。
 - **推理类型校准**：结论标注推理类型（演绎/归纳/溯因/类比/反事实），并按类型诚实校准强度。
 - **思维可见**：深度模式输出思维台账（`templates/thinking-ledger.md`），推理可审计。
-- **可证明**：`evals/` 自带 28 个用例与评分表，验证技能确实改变了行为。
+- **可检查**：`evals/` 自带 28 个用例与评分表，检查协议遵守情况；目前没有配对基线。
 
 ## 评测
 
@@ -165,9 +165,9 @@ falsify 蒸馏自 70+ 社区来源，并有学术论文背书：
 
 真实社区交叉验证（外部 dogfood）见 [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md)：4 个来自 GitHub issue 与 Stack Overflow 的真实问题，4/4 通过，其中 3/3 有真实结论的用例判断与事实一致。
 
-**真实事故获官方证实（2026-09）**：[home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420)（Aladdin 车库门泄漏事故——陌生人门出现在用户 Home Assistant 中）期间，协议保持两个假设开放（本地凭据串号 vs 服务端跨租户泄漏）并指向一步判死实验。厂商 [Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751) 随后**确认回滚了一个疑似致错的服务端变更**——服务端假设幸存、本地假设被排除。完整记录：[evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md)。
+**真实事故获官方证实（2026-09）**：[home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420)（Aladdin 车库门泄漏事故——陌生人门出现在用户 Home Assistant 中）期间，协议保持两个假设开放（本地凭据串号 vs 服务端跨租户泄漏）并指向一步判死实验。厂商 [Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751) 随后**确认回滚了一个疑似致错的服务端变更**——回滚支持服务端假设，但不足以排除所有本地原因。完整记录：[evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md)。
 
-**历史跨模型结果（运行日期 2026-08-26，记录日期 2026-08-27）**：28 个用例在两个外部 DeepSeek 模型上双向运行。这是有日期的观察，不是证明，也不保证正确性：
+**历史跨模型结果（关联 v0.8.3；报告头 2026-08-26、文件名 2026-08-27，确切运行日期未确定）**：28 个用例在两个外部 DeepSeek 模型上双向运行。这是有日期的观察，不是证明，也不保证正确性：
 
 - `deepseek-reasoner` 生成 × `deepseek-chat` 判分 → **26/28 通过，均分 15.3/18**
 - `deepseek-chat` 生成 × `deepseek-reasoner` 判分 → **26/28 通过，均分 16.4/18**

@@ -211,12 +211,12 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
   </div>
   <span class="en">Falsify before you believe</span>
   <h1>先证伪，再相信。<br>先标不确定，再下结论。<br><span class="grad">没有可证伪的假设，就没有结论。</span></h1>
-  <p class="lead">falsify 是一个单 Markdown 技能，给任何 AI 智能体装上五段式科学思维协议：<b>公理 → 假设 → 对抗 → 验证 → 收束</b>。它阻止智能体给出自己无法证伪的自信结论——包括 Codex、Claude Code、DeepSeek Harness、Cursor、Gemini CLI 在内的 20+ 智能体。</p>
+  <p class="lead">falsify 是一个单 Markdown 技能，给任何 AI 智能体装上五段式科学思维协议：<b>公理 → 假设 → 对抗 → 验证 → 收束</b>。它提醒智能体检验自信结论，但不保证推理正确——包括 Codex、Claude Code、DeepSeek Harness、Cursor、Gemini CLI 在内的 20+ 智能体。</p>
   <div class="iron"><b>NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.</b><br><span class="zh">没有可证伪的假设，就没有结论。</span></div>
   <div class="btns">
     <a class="btn btn-primary" href="https://github.com/263311487-ux/falsify">GitHub 仓库 ↗</a>
     <a class="btn btn-ghost" href="https://github.com/263311487-ux/falsify/blob/main/SKILL.md">阅读协议</a>
-    <a class="btn btn-ghost" href="https://github.com/263311487-ux/falsify/releases/tag/v0.8.3">Release v0.8.3</a>
+    <a class="btn btn-ghost" href="https://github.com/263311487-ux/falsify/releases">已发布版本</a>
   </div>
   <div class="pills">
     <span class="pill">⚡ 5 阶段协议</span>
@@ -289,16 +289,16 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
 
 <section style="padding-top:0">
   <div class="wrap">
-    <div class="sec-label">Evidence</div>
+    <div class="sec-label">Evidence</div><p>手动重试不能证明失败只是波动；配对基线、多种子、留出集尚未提供。<a href="https://github.com/263311487-ux/falsify/blob/main/evals/provenance.json">报告溯源</a> · <a href="https://github.com/263311487-ux/falsify/blob/main/docs/failure-cases.md">失败案例与限制</a></p>
     <h2>可验证，不是玄学</h2>
-    <p class="sec-sub">协议的效果被写成 28 个评测用例 + 评分标准，并经过真实社区案例的外部交叉验证。</p>
+    <p class="sec-sub">历史开发评测关联 v0.8.3：报告头为 2026-08-26、文件名为 2026-08-27，日期差异未解决。以下为作者报告，不是正确性保证。</p>
     <div class="stats">
-      <div class="stat"><div class="v">28/28</div><div class="k">eval 用例自测通过</div><div class="d">evals/cases.md</div></div>
+      <div class="stat"><div class="v">28</div><div class="k">公开开发用例</div><div class="d">evals/cases.md</div></div>
       <div class="stat"><div class="v">4/4</div><div class="k">真实社区外部验证</div><div class="d">GitHub issue + Stack Overflow</div></div>
       <div class="stat"><div class="v">3/3</div><div class="k">有结论案例与事实一致</div><div class="d">ground truth 对照</div></div>
       <div class="stat"><div class="v">17.0</div><div class="k">外部案例均分 / 18</div><div class="d">评分标准 evals/rubric.md</div></div>
-      <div class="stat"><div class="v">26/28</div><div class="k">deepseek-chat 跨模型评测</div><div class="d">生成 × 判分交叉验证</div></div>
-      <div class="stat"><div class="v">26/28</div><div class="k">deepseek-reasoner 跨模型评测</div><div class="d">双模型互证，单命令可复现</div></div>
+      <div class="stat"><div class="v">26/28</div><div class="k">deepseek-chat 跨模型评测</div><div class="d">历史单轮 · LLM 判分</div></div>
+      <div class="stat"><div class="v">26/28</div><div class="k">deepseek-reasoner 跨模型评测</div><div class="d">历史单轮 · 非稳定性证明</div></div>
     </div>
   </div>
 </section>

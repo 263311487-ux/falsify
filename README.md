@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="docs/social-preview.png" alt="falsify — the scientific thinking protocol for AI agents" width="100%">
+  <img src="docs/social-preview.svg" alt="falsify — the scientific thinking protocol for AI agents" width="100%">
 </div>
 
 <h1 align="center">falsify</h1>
@@ -26,7 +26,7 @@
 
 ---
 
-**falsify** is a single-Markdown skill that installs a 5-stage scientific thinking protocol on any AI agent (Codex, Claude Code, DeepSeek Harness, Cursor, Gemini CLI, …). It stops the agent from giving confident answers it cannot falsify.
+**falsify** is a single-Markdown skill that installs a 5-stage scientific thinking protocol on any AI agent (Codex, Claude Code, DeepSeek Harness, Cursor, Gemini CLI, …). It asks the agent to challenge confident claims; a prompt protocol does not guarantee correct reasoning.
 
 **The Iron Law:**
 
@@ -87,7 +87,7 @@ npx falsify-skill --install
 npm i -g falsify-skill && falsify-skill --install
 ```
 
-Or manually: clone the repo and copy `SKILL.md` into your agent's skills directory
+The installer refuses existing skill directories and symlinked destination parents. Review and move an older copy aside first. For a manual install, also include references/ and templates/. Clone the repo and copy `SKILL.md` into your agent's skills directory
 (`~/.codex/skills/falsify/`, `~/.claude/skills/falsify/`, `.cursor/skills/falsify/`, …).
 
 
@@ -108,7 +108,7 @@ Works in English too, and is scriptable:
 
 ```bash
 npx falsify-skill "The API is definitely the fastest solution"
-npx falsify-skill --json "肯定是内存泄漏"     # machine-readable verdict for CI / scripts
+npx falsify-skill --json "肯定是内存泄漏"     # machine-readable heuristic hints for CI / scripts
 echo "restart fixed it, no need to dig deeper" | npx falsify-skill --install
 ```
 
@@ -164,7 +164,7 @@ The five stages (`SKILL.md` is the full protocol):
 - **Frontier questioning.** When input is needed, the whole open frontier is asked in one round — with recommended answers, never one-question-at-a-time interrogation.
 - **Reasoning-type calibration.** Verdicts label their inference (deductive / inductive / abductive / analogical / counterfactual) and calibrate to its honest strength.
 - **Visible thinking.** Depth mode renders a thinking ledger (`templates/thinking-ledger.md`) so reasoning is auditable.
-- **Provable.** `evals/` ships 28 cases + rubric so you can verify the skill changes behavior.
+- **Inspectable.** `evals/` ships 28 cases + rubric for examining adherence; no paired baseline is included.
 
 ## Evals
 
@@ -172,9 +172,9 @@ See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). Thr
 
 Real-community cross-validation (external dogfood) is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): 4 real questions from GitHub issues and Stack Overflow, 4/4 passed, and 3/3 cases with a known ground truth matched reality.
 
-**Confirmed in a live incident (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420) — the Aladdin garage-door leak where strangers' doors appeared in users' Home Assistant — the protocol kept two hypotheses open (local credential mix-up vs. server-side cross-tenant leak) and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) subsequently **confirmed rolling back a server-side change they suspect caused it** — the server-side hypothesis survived, the local one was excluded. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
+**Confirmed in a live incident (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420) — the Aladdin garage-door leak where strangers' doors appeared in users' Home Assistant — the protocol kept two hypotheses open (local credential mix-up vs. server-side cross-tenant leak) and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) subsequently **confirmed rolling back a server-side change they suspect caused it** — the rollback supported the server-side hypothesis; it did not conclusively exclude all local causes. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
 
-**Historical cross-model result (runs dated 2026-08-26, recorded 2026-08-27):** the full 28-case suite was run on two external DeepSeek models in both directions. These are dated observations, not a proof or correctness guarantee:
+**Historical cross-model result (associated with v0.8.3; report headers 2026-08-26, filenames 2026-08-27; exact run date unresolved):** the full 28-case suite was run on two external DeepSeek models in both directions. These are dated observations, not a proof or correctness guarantee:
 
 - `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 pass, avg 15.3/18**
 - `deepseek-chat` generator × `deepseek-reasoner` judge → **26/28 pass, avg 16.4/18**

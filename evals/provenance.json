@@ -3,11 +3,64 @@
   "recorded_at": "2026-10-08",
   "evidence_kind": "historical author-run protocol-adherence evaluation",
   "reports": [
-    {"path":"evals/results/deepseek-reasoner-2026-08-27.md","report_header_date":"2026-08-26","filename_date":"2026-08-27","exact_run_date":null,"generator":"deepseek-reasoner","judge":"deepseek-chat","cases":28,"passed":26,"reported_average":"15.3/18","judge_repeats":3},
-    {"path":"evals/results/deepseek-chat-2026-08-27-final.md","report_header_date":"2026-08-26","filename_date":"2026-08-27","exact_run_date":null,"generator":"deepseek-chat","judge":"deepseek-reasoner","cases":28,"passed":26,"reported_average":"16.4/18","judge_repeats":3}
+    {
+      "path": "evals/results/deepseek-reasoner-2026-08-27.md",
+      "report_header_date": "2026-08-26",
+      "filename_date": "2026-08-27",
+      "exact_run_date": null,
+      "generator": "deepseek-reasoner",
+      "judge": "deepseek-chat",
+      "cases": 28,
+      "passed": 26,
+      "reported_average": "15.3/18",
+      "judge_repeats": 3,
+      "sha256": "06967d7426ad5d1623a48e3550f32628c0439ace5c43e933bb8c372c318c0a25",
+      "failed_case_ids": [
+        3,
+        9
+      ]
+    },
+    {
+      "path": "evals/results/deepseek-chat-2026-08-27-final.md",
+      "report_header_date": "2026-08-26",
+      "filename_date": "2026-08-27",
+      "exact_run_date": null,
+      "generator": "deepseek-chat",
+      "judge": "deepseek-reasoner",
+      "cases": 28,
+      "passed": 26,
+      "reported_average": "16.4/18",
+      "judge_repeats": 3,
+      "sha256": "e4b7a60d70218c055c44f1ff1a1614db6691f1f2a4199b3875d647b6e96c989f",
+      "failed_case_ids": [
+        6,
+        22
+      ]
+    }
   ],
   "date_discrepancy": "Report headers say August 26; filenames and historical notes say August 27. Exact date is unknown.",
   "interpretation_correction": "Original counts are retained. Manual retries are qualitative follow-up only; they do not establish sampling variance or absence of a stable protocol gap.",
-  "not_present": ["paired no-skill baseline", "preregistered multiple generation seeds", "held-out cases", "independent replication", "raw model and judge responses", "immutable model snapshots", "historical protocol hashes"],
-  "limitations": ["Protocol adherence is not factual correctness.", "The skill is guidance, not a guarantee of correct reasoning.", "The deterministic CLI does not validate model reasoning."]
+  "not_present": [
+    "paired no-skill baseline",
+    "preregistered multiple generation seeds",
+    "held-out cases",
+    "independent replication",
+    "raw model and judge responses",
+    "immutable model snapshots",
+    "historical protocol hashes"
+  ],
+  "limitations": [
+    "Protocol adherence is not factual correctness.",
+    "The skill is guidance, not a guarantee of correct reasoning.",
+    "The deterministic CLI does not validate model reasoning."
+  ],
+  "source_commit": "1db78188f8ca532891cc6de536b376d4a6b7c04f",
+  "protocol_version_claimed_in_historical_notes": "0.8.3",
+  "historical_protocol_sha256": null,
+  "future_requirements": [
+    "Paired no-skill baseline",
+    "Pre-registered multiple generation seeds",
+    "Held-out prompts",
+    "Raw outputs, frozen model and prompt configurations"
+  ]
 }
