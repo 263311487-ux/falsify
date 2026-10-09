@@ -40,21 +40,23 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 <p align="center">
   <a href="https://263311487-ux.github.io/falsify/"><img src="https://img.shields.io/badge/Try%20the%20live%20demo-%E2%86%92-111111?style=for-the-badge&logo=github" alt="Live demo"></a>
   <img src="https://img.shields.io/badge/evals-historical%2026%2F28-6b7280?style=for-the-badge" alt="Historical 26/28 evals">
-  <img src="https://img.shields.io/badge/dogfood-4%2F4%20real%20community-22b558?style=for-the-badge" alt="4/4 real community">
+  <img src="https://img.shields.io/badge/dogfood-author%20case%20analysis-6b7280?style=for-the-badge" alt="Author case analysis">
   <img src="https://img.shields.io/badge/listed%20in-agentic%2Dawesome%2Dskills%20(%E2%AD%9045.5k)-111111?style=for-the-badge" alt="Listed in AAS">
 </p>
+
+Candidate 0.8.9: commands below run from this local checkout; npm may still serve an older version without these protections. Package this checkout with npm pack, then install the resulting falsify-skill-0.8.9.tgz into a fresh temporary prefix. No API key or model call is needed. See [candidate first success](docs/first-success.md).
 
 ## Try the coach first — no API key
 
 Requires Node.js 16 or newer. This runs locally without a model call or installing agent skills:
 
 ```bash
-npx falsify-skill "The cache is definitely the cause"
+node bin/falsify-skill.mjs "The cache is definitely the cause"
 ```
 
 The output is a checklist, not a verdict or completed test. From a checkout: `node bin/falsify-skill.mjs "The cache is definitely the cause"`.
 
-## What it changes
+## Intended behavior (illustrative, not a paired experiment)
 
 | | Before (typical agent) | After (falsify) |
 |---|---|---|
@@ -77,14 +79,14 @@ Or with the skills CLI:
 npx skills add 263311487-ux/falsify
 ```
 
-Or from npm (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
+Or explicitly from this candidate checkout (installs the `SKILL.md` into Codex and Claude Code skill dirs automatically):
 
 ```text
-npx falsify-skill --install
+node bin/falsify-skill.mjs --install
 ```
 
 ```text
-npm i -g falsify-skill && falsify-skill --install
+node bin/falsify-skill.mjs --help
 ```
 
 The installer refuses existing skill directories and symlinked destination parents. Review and move an older copy aside first. For a manual install, also include references/ and templates/. Clone the repo and copy `SKILL.md` into your agent's skills directory
@@ -96,10 +98,10 @@ The installer refuses existing skill directories and symlinked destination paren
 The npm package is a **falsification coach**, not just an installer — paste any claim and it walks it through the protocol:
 
 ```bash
-npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就好。"
+node bin/falsify-skill.mjs "这个慢查询显然是缓存的问题，把缓存修了就好。"
 #       ① Red-flag words   → 显然 detected — exactly the words the protocol distrusts
 #       ② Mode routing     → Depth (high-stakes, acted-on)
-#       ③ Iron Law rewrite → if [H] then I should observe [O]; if ¬O, H is dead
+#       ③ Iron Law rewrite → state H + assumptions, predict O, specify a noise-aware rejection rule
 #       ④ Five-stage gap   → 5/5 missing (axiomatize → hypothesize → adversarialize → verify → converge)
 #       ⑤ Upgrade template → rivals, prediction, kill condition, evidence grade, confidence
 ```
@@ -107,9 +109,9 @@ npx falsify-skill "这个慢查询显然是缓存的问题，把缓存修了就�
 Works in English too, and is scriptable:
 
 ```bash
-npx falsify-skill "The API is definitely the fastest solution"
-npx falsify-skill --json "肯定是内存泄漏"     # machine-readable heuristic hints for CI / scripts
-echo "restart fixed it, no need to dig deeper" | npx falsify-skill --install
+node bin/falsify-skill.mjs "The API is definitely the fastest solution"
+node bin/falsify-skill.mjs --json "肯定是内存泄漏"     # machine-readable heuristic hints for CI / scripts
+echo "restart fixed it, no need to dig deeper" | node bin/falsify-skill.mjs
 ```
 
 It's a heuristic template, not an LLM judge — it reminds you what the protocol demands. The full protocol installs into your agent:
@@ -120,7 +122,7 @@ It's a heuristic template, not an LLM judge — it reminds you what the protocol
 
 
 ```text
-npx falsify-skill --install
+node bin/falsify-skill.mjs --install
 ```
 
 ## Why it is grounded (not vibes)
@@ -142,7 +144,7 @@ how agents should reason:
 - **Reflexion (Shinn et al., NeurIPS 2023) / Huang et al. 2023 (*LLMs Cannot Self-Correct Reasoning Yet*)** — internal self-reflection is not verification: without an external signal, reflection drifts. Confidence only earns an upgrade when a test, a lookup, or an independent source changes it.
 - **Kahneman, *Thinking, Fast and Slow* / Simon, bounded rationality** — dual-process routing: low-stakes reversible questions answer fast (System 1), high-stakes or irreversible ones get the full protocol (System 2); unbounded searches satisfice against a pre-declared aspiration threshold.
 - **Galef, *The Scout Mindset* / von Neumann-Morgenstern utility** — the reversal test (would you accept the same evidence reversed?) and the bias audit catch motivated reasoning; expected-value rules (max EV / EU / minimax regret / satisficing) turn a calibrated verdict into a rational choice.
-- **Snowden, Cynefin framework / Kepner-Tregoe analysis / Boyd, OODA loop** — classify the cause–effect domain before choosing a method (wrong-domain method is the failure mode); bound selective defects with IS/IS-NOT; screen decisions with MUST/WANT plus adverse-consequence tests; act at ~70% and re-observe when the situation is moving and the move is reversible.
+- **Snowden, Cynefin framework / Kepner-Tregoe analysis / Boyd, OODA loop** — classify the cause–effect domain before choosing a method (wrong-domain method is the failure mode); bound selective defects with IS/IS-NOT; screen decisions with MUST/WANT plus adverse-consequence tests; compare reversible mitigation costs with waiting, then re-observe when the situation is moving and the move is reversible.
 
 ## How it works
 
@@ -150,7 +152,7 @@ The five stages (`SKILL.md` is the full protocol):
 
 ```
 公理化 Axiomatize   →  separate axioms / assumptions / hearsay
-假设化 Hypothesize  →  if [H] then we observe [O]; if [¬O], H is dead
+假设化 Hypothesize  →  H + assumptions → prediction + noise-aware rejection rule
 对抗 Adversarialize →  steelman the opponent, attack yourself first
 验证 Verify         →  hunt disconfirming evidence, grade it, run the cheapest test
 收束 Converge       →  calibrated verdict, remaining unknowns, lesson to the ledger
@@ -164,20 +166,22 @@ The five stages (`SKILL.md` is the full protocol):
 - **Frontier questioning.** When input is needed, the whole open frontier is asked in one round — with recommended answers, never one-question-at-a-time interrogation.
 - **Reasoning-type calibration.** Verdicts label their inference (deductive / inductive / abductive / analogical / counterfactual) and calibrate to its honest strength.
 - **Visible thinking.** Depth mode renders a thinking ledger (`templates/thinking-ledger.md`) so reasoning is auditable.
-- **Inspectable.** `evals/` ships 28 cases + rubric for examining adherence; no paired baseline is included.
+- **Inspectable.** `evals/` ships 28 historical cases + rubric for examining adherence; no paired baseline is included.
 
 ## Evals
 
-See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). Threshold: pass = 12/18 with no violation of the Iron Law.
+See [evals/cases.md](evals/cases.md) and [evals/rubric.md](evals/rubric.md). See [mode-aware rules and denominators](evals/README.md), including Stage-0 exceptions.
 
-Real-community cross-validation (external dogfood) is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): 4 real questions from GitHub issues and Stack Overflow, 4/4 passed, and 3/3 cases with a known ground truth matched reality.
+Author-run community case analysis is documented in [evals/dogfood-external-20260827.md](evals/dogfood-external-20260827.md): four selected GitHub/Stack Overflow cases, self-scored by the author; this was not independent validation and had no paired no-skill baseline.
 
-**Confirmed in a live incident (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420) — the Aladdin garage-door leak where strangers' doors appeared in users' Home Assistant — the protocol kept two hypotheses open (local credential mix-up vs. server-side cross-tenant leak) and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) subsequently **confirmed rolling back a server-side change they suspect caused it** — the rollback supported the server-side hypothesis; it did not conclusively exclude all local causes. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
+**Historical incident note (2026-09)**: during [home-assistant/core#181420](https://github.com/home-assistant/core/issues/181420), the protocol kept local and server-side hypotheses open and pointed to one discriminating test. The vendor ([Genie](https://github.com/home-assistant/core/issues/181420#issuecomment-5564897751)) later reported rolling back a suspected server-side change; this supports investigating that side but does not establish the complete cause or exclude every local cause. Full write-up: [evals/dogfood-cli-20260907.md](evals/dogfood-cli-20260907.md).
 
 **Historical cross-model result (associated with v0.8.3; report headers 2026-08-26, filenames 2026-08-27; exact run date unresolved):** the full 28-case suite was run on two external DeepSeek models in both directions. These are dated observations, not a proof or correctness guarantee:
 
-- `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 pass, avg 15.3/18**
-- `deepseek-chat` generator × `deepseek-reasoner` judge → **26/28 pass, avg 16.4/18**
+- `deepseek-reasoner` generator × `deepseek-chat` judge → **26/28 report-level passes, avg 15.3/18**
+- `deepseek-chat` generator × `deepseek-reasoner` judge → **26/28 report-level passes, avg 16.4/18**
+
+The 12/18 threshold applies to scored depth-mode cases; routing/simple/question/nudge cases use different scoring rules. Historical reports record case 24 as PASS at 4/18 under Stage-0 routing, so 26/28 must not be read as 26 depth scores above 12.
 
 The reports include failures and qualitative manual re-checks. A manual retry does **not** establish that an original failure was sampling variance, nor does it establish that the protocol has no stable gap. Paired baselines, pre-registered multiple seeds, held-out cases, and raw reproducible responses are future requirements, not present evidence. Reproduce only with the required external key: `DEEPSEEK_API_KEY=... node evals/run_evals.mjs --model deepseek-reasoner`. Provenance: [evals/provenance.json](evals/provenance.json) · failure cases and limits: [docs/failure-cases.md](docs/failure-cases.md) · reports: [reasoner](evals/results/deepseek-reasoner-2026-08-27.md) · [chat](evals/results/deepseek-chat-2026-08-27-final.md).
 
@@ -197,13 +201,13 @@ Built on a simple inheritance: 公理 → 假设 → 对抗 → 验证 → 收�
 falsify is one leg of a three-part workflow: **think** → **verify** → **present**.
 
 - [**dsh-verify**](https://github.com/263311487-ux/dsh-verify) — browser-verified delivery. falsify keeps the thinking honest; dsh-verify keeps the *browser* honest (real-browser tests, not LLM-judged vibes). Use both: falsify catches the wrong conclusion, dsh-verify catches the broken output.
-- [**imprint-pdf**](https://github.com/263311487-ux/imprint-pdf) — publisher-grade PDF rendering from Markdown, with a 0–100 print-quality gate. The polished output end of the pipeline.
+- [**imprint-pdf**](https://github.com/263311487-ux/imprint-pdf) — Markdown→PDF with a heuristic 0–100 report (`npx imprint-pdf`; Python package `imprint-pdf`).
 
 Install any of them in one command:
 ```bash
 npx skills add 263311487-ux/falsify
 npx dsh-verify
-npx imprint
+npx imprint-pdf
 ```
 
 ## License

@@ -220,7 +220,7 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
   </div>
   <div class="pills">
     <span class="pill">⚡ 5 阶段协议</span>
-    <span class="pill">🧪 28 个评测用例</span>
+    <span class="pill">🧪 28 个历史评测用例</span>
     <span class="pill">🌍 蒸馏自 70+ 社区来源</span>
     <span class="pill">📦 npm · skills.sh 一键安装</span>
     <span class="pill">🧩 适配 20+ 智能体</span>
@@ -261,12 +261,12 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
             <span class="tag">V 验证</span>
             <p>esbuild 产物 diff：<code>__name(get3, "get")</code> 重命名打破遮蔽 = <span class="ok">直接证据</span>。最便宜的真测试：把 Bun 产物里 <code>function get</code> 改名再跑。</p>
           </div>
-          <div class="verdict good">结论：Bun 侧命名处理 bug（与 #7301 同族），Svelte 脆弱命名是触发器而非根因。可核查：升级 Bun 修复版后不再崩溃。<b>与 ground truth 完全一致 ✅</b></div>
+          <div class="verdict good">结论：Bun 侧命名处理 bug（与 #7301 同族），Svelte 脆弱命名是触发器而非根因。可核查：升级 Bun 修复版后不再崩溃。<b>与后续记录相符（作者报告，非独立验证）</b></div>
         </div>
         <div class="ba-foot"><span>Iron Law · 分级证据 · 可核查声明</span><span class="score">18 / 18</span></div>
       </div>
     </div>
-    <p class="ba-caption">完整案例：evals/dogfood-external-20260827.md · 4 个真实社区案例，3/3 有事实结论的与后来发生的现实一致</p>
+    <p class="ba-caption">完整案例：evals/dogfood-external-20260827.md · 4 个作者选取并自评的社区案例；未做独立验证或配对基线</p>
   </div>
 </section>
 
@@ -294,9 +294,9 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
     <p class="sec-sub">历史开发评测关联 v0.8.3：报告头为 2026-08-26、文件名为 2026-08-27，日期差异未解决。以下为作者报告，不是正确性保证。</p>
     <div class="stats">
       <div class="stat"><div class="v">28</div><div class="k">公开开发用例</div><div class="d">evals/cases.md</div></div>
-      <div class="stat"><div class="v">4/4</div><div class="k">真实社区外部验证</div><div class="d">GitHub issue + Stack Overflow</div></div>
-      <div class="stat"><div class="v">3/3</div><div class="k">有结论案例与事实一致</div><div class="d">ground truth 对照</div></div>
-      <div class="stat"><div class="v">17.0</div><div class="k">外部案例均分 / 18</div><div class="d">评分标准 evals/rubric.md</div></div>
+      <div class="stat"><div class="v">4</div><div class="k">作者选取社区案例</div><div class="d">GitHub issue + Stack Overflow</div></div>
+      <div class="stat"><div class="v">3</div><div class="k">作者报告的可对照案例</div><div class="d">ground truth 对照</div></div>
+      <div class="stat"><div class="v">17.0</div><div class="k">历史作者均分 / 18</div><div class="d">评分标准 evals/rubric.md</div></div>
       <div class="stat"><div class="v">26/28</div><div class="k">deepseek-chat 跨模型评测</div><div class="d">历史单轮 · LLM 判分</div></div>
       <div class="stat"><div class="v">26/28</div><div class="k">deepseek-reasoner 跨模型评测</div><div class="d">历史单轮 · 非稳定性证明</div></div>
     </div>
@@ -370,31 +370,16 @@ h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;letter-spacing:-.5px;margin-
   </div>
 </div>
 
-<script>
-const RED_FLAGS=["显然","明显","肯定","一定","就是","毫无疑问","明摆着","不用说","大家都知道","不可能"];
-const OBS_WORDS=["快","慢","延迟","崩溃","错误","报错","响应","耗时","成本","收入","数量","涨","跌","%","秒","分钟","小时","天","次","并发","用户","延迟","吞吐","内存","CPU"];
-const INCIDENT_WORDS=["事故","宕机","线上","生产","崩溃","down","outage","紧急","degrad"];
-const NUDGE_WORDS=["大概","约","粗略","估算","ballpark","rough","差不多"];
-const SIMPLE_WORDS=["几点","现在时间","天气","是谁","哪年"];
+<script type="module">
+import {checkClaim} from "./bin/falsify-core.mjs";
 const $=id=>document.getElementById(id);
 
 function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 
-function modeRoute(text){
-  if(INCIDENT_WORDS.some(w=>text.toLowerCase().includes(w)))
-    return {m:"Incident（事故）", tag:"red", note:"线上事故 → 先以 ~70% 置信度做可逆操作稳住，再证伪效果。协议禁止在事故里先跑完整分析。"};
-  if(NUDGE_WORDS.some(w=>text.toLowerCase().includes(w)))
-    return {m:"Nudge（估算）", tag:"warn", note:"估算类问题 → 直接给带假设的答案 + 最多 3 个追问，不上五段式台账。"};
-  if(SIMPLE_WORDS.some(w=>text.includes(w)))
-    return {m:"Simple（简单）", tag:"ok", note:"简单事实问题 → 直接答，协议不触发。"};
-  return {m:"Depth（深度）", tag:"ok", note:"高利害/会执行的问题 → 走完整五段式。"};
-}
-
 function checkVerdict(text){
-  const flags=RED_FLAGS.filter(f=>text.includes(f));
-  const obs=OBS_WORDS.filter(w=>text.includes(w));
-  const route=modeRoute(text);
-  const short=text.length<18;
+  const result=checkClaim(text);
+  const flags=result.redFlags;
+  const route={m:result.route,tag:"warn",note:result.lang==="zh"?result.routeNoteZh:result.routeNoteEn};
   const cards=[];
 
   // 0. red flags
@@ -407,12 +392,14 @@ function checkVerdict(text){
   cards.push({t:"模式路由 · MODE SELECTION", tag:"→ "+route.m, tagcls:route.tag,
     body:`这个问题路由到 <b>${route.m}</b>。${route.note}`});
 
+  if(!route.m.startsWith("Depth")) return cards;
+
   // 2. iron law
   const claim=text.length>60?text.slice(0,57)+"…":text;
   cards.push({t:"铁律 · Iron Law", tag:"核心", tagcls:"red",
     body:`铁律：<b>没有可证伪的假设，就没有结论</b>。把「${esc(claim)}」改写成：
       <div class="vc-model">如果 [假设] 为真，那么我应该观察到 [可测量的信号 O]。
-如果观察到 ¬O，[假设] 死亡，立即放弃。</div>`});
+预先写明辅助假设、观测误差和拒绝规则；失败只否定假设与条件的合取。</div>`});
 
   // 3. five-stage checklist
   const checks=[
@@ -422,9 +409,8 @@ function checkVerdict(text){
     {k:"验证", q:"证据分级 + 主动找反证 + 跑最便宜的测试", ok:false},
     {k:"收束", q:"标出置信度与剩余未知，给可核查声明", ok:false},
   ];
-  if(obs.length>=2) checks[1].ok=true;
-  if(short) checks[1].ok=false;
-  cards.push({t:"五阶段缺失清单", tag:"缺 "+checks.filter(c=>!c.ok).length+"/5", tagcls:checks.every(c=>c.ok)?"ok":"warn",
+
+  cards.push({t:"五阶段待核查提示", tag:"缺 "+checks.filter(c=>!c.ok).length+"/5", tagcls:checks.every(c=>c.ok)?"ok":"warn",
     list:checks.map(c=>({label:`<b>${c.k}</b> · ${c.q}`, done:c.ok}))});
 
   // 4. rewrite model
@@ -433,7 +419,7 @@ function checkVerdict(text){
       <div class="vc-model">假设 H：${esc(claim)}
 备选 A：还有别的解释（数据/环境/时序/用户行为）
 预测 O：如果 H 为真，[此处写下可测量信号] 应该出现
-判死条件：观察到 ¬O 时 H 立即死亡
+拒绝规则：考虑噪声与辅助假设，预先定义足以拒绝的观察
 证据等级：已看到 [事实/数字] / 未验证 [假设] / 听说的 [传闻]
 置信度：___%（基于上述证据，不是感觉）</div>`});
 

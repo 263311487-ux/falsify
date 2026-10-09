@@ -1,3 +1,5 @@
+> **Superseding interpretation (2026-10-09):** This historical author-selected case narrative is retained for traceability, not independent validation or a paired baseline. Earlier claims of complete causal confirmation, exclusion of all local causes, 28/28 self-tests, and reality matches are descriptive historical assertions, not current established results. See [evaluation status](README.md).
+
 # Falsify 外部交叉验证报告（真实社区用例）
 
 > 日期：2026-08-27 ｜ 版本：falsify v0.8.0（该验证在 v0.8.0 上执行；随 v0.8.1 发布入库）｜ 方法：外部 dogfood

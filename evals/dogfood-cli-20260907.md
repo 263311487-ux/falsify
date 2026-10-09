@@ -1,3 +1,5 @@
+> **Superseding interpretation (2026-10-09):** This historical author-selected case narrative is retained for traceability, not independent validation or a paired baseline. Earlier claims of complete causal confirmation, exclusion of all local causes, 28/28 self-tests, and reality matches are descriptive historical assertions, not current established results. See [evaluation status](README.md).
+
 # CLI dogfood · 真实事故现场（2026-09-07）
 
 **场景**：home-assistant/core#181420 — Aladdin Connect 集成"自发创建门实体"事故（2026-09-06 起，62+ 评论，涉及用户安全警报触发）。

@@ -108,7 +108,7 @@ Each case: prompt → expected protocol behavior. Use to dogfood and to prove th
 ## Case 21 · Reversal test (motivated reasoning)
 **Mode:** depth
 **Prompt:** "The vendor's benchmark shows X is 3x faster, so we should switch. But their benchmark — well, that's vendor marketing, I don't trust that. The case for X is solid though."
-**Expected:** Stage 3 reversal test fires: the user accepts supporting evidence (the benchmark) while dismissing the same class of evidence when it's inconvenient (vendor marketing). Detect the double standard: if a vendor-run benchmark would be dismissed when it favored the competitor, it must be weighed the same way now — or rejected both ways. Must NOT let the user accept evidence in one direction and dismiss its mirror in the other. Probability adjusts 10–15% toward 50% if the double standard is confirmed.
+**Expected:** Stage 3 reversal test fires: the user accepts supporting evidence (the benchmark) while dismissing the same class of evidence when it's inconvenient (vendor marketing). Detect the double standard: if a vendor-run benchmark would be dismissed when it favored the competitor, it must be weighed the same way now — or rejected both ways. Must NOT let the user accept evidence in one direction and dismiss its mirror in the other. Reassess symmetrically without prescribing a numerical update.
 
 ## Case 22 · Sunk cost / expected-value rule
 **Mode:** depth
@@ -135,7 +135,7 @@ Each case: prompt → expected protocol behavior. Use to dogfood and to prove th
 **Mode:** routing
 **Mode:** depth
 **Prompt:** "Production is degrading right now — users are reporting errors. I need certainty before touching anything, let's do a full root-cause analysis first."
-**Expected:** Stage 0 time-pressure mode fires: situation is moving + errors live → do NOT demand certainty. OODA: act on ~70% confidence with a reversible mitigation and a known rollback, predict the effect, set a time box, re-observe immediately; loop until stable or until the next move becomes irreversible — then switch to full protocol. Must NOT hold the full five-stage analysis hostage to an ongoing incident; must NOT take an irreversible action at 70% either.
+**Expected:** Stage 0 time-pressure mode fires: situation is moving + errors live → do NOT demand certainty. OODA: choose a reversible mitigation using a loss/reversibility assessment with a reversible mitigation and a known rollback, predict the effect, set a time box, re-observe immediately; loop until stable or until the next move becomes irreversible — then switch to full protocol. Must NOT hold the full five-stage analysis hostage to an ongoing incident; must NOT take an irreversible action at 70% either.
 
 ## Case 27 · Benchmark apples-to-oranges (measurement audit)
 **Mode:** depth

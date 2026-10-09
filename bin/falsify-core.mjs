@@ -36,8 +36,8 @@ export function modeRoute(text) {
   if (!(estimate && highStakes) && INCIDENT_WORDS.some(w => mentions(t, w)))
     return {
       mode: "Incident（事故）",
-      zh: "线上事故 → 先以 ~70% 置信度做可逆操作稳住，再证伪效果。协议禁止在事故里先跑完整分析。",
-      en: "Live incident → stabilize first with a reversible move at ~70% confidence, then verify. The protocol forbids running the full analysis mid-incident.",
+      zh: "线上事故 → 比较可逆缓解与等待的风险后先稳住，再证伪效果。协议禁止在事故里先跑完整分析。",
+      en: "Live incident → compare the harm of waiting with a reversible mitigation, then stabilize, then verify. The protocol forbids running the full analysis mid-incident.",
     };
   if (estimate && !highStakes)
     return {

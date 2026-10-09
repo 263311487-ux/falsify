@@ -72,7 +72,7 @@ Ask the whole open frontier in one round — numbered questions, each with a rec
 | Model | Question it answers | Stage |
 |---|---|---|
 | Outside View / Reference Class | What usually happens in situations like this, before this specific case? | 1 |
-| Decomposition vs Benchmark | Do my part-estimates reconcile with the base rate (gap >20pt → investigate)? | 1 |
+| Decomposition vs Benchmark | Do my part-estimates reconcile with the base rate (investigate gaps relative to estimate uncertainty)? | 1 |
 | Pre-Commitment | Did I write the prediction (with probability) before seeing the evidence? | 2 |
 | Brier Scoring | Over time, are my 0.55s right as often as my 0.95s? (overconfidence check) | 4 |
 | Failure-Mode Summation | Do my quantified failure modes match the failure rate my confidence implies? | 3 |
@@ -116,7 +116,7 @@ Ask the whole open frontier in one round — numbered questions, each with a rec
 | Scope Sensitivity (Galef) | Do my probabilities scale with magnitude, or am I scope-insensitive? | 3/4 |
 | Status Quo Bias (Galef) | Am I assuming "no change" needs no evidence while change needs a lot? | 3/4 |
 | Bias Audit (Galef / lex-bias) | Which of the six (confirmation/availability/anchoring/affect/overconfidence/sunk cost) is active, and by how much? | 4 |
-| CI Surprise Test | Do outcomes fall outside my intervals more often than they should — and if so, widen 1.5–2×? | 4 |
+| CI Surprise Test | Do outcomes fall outside my intervals more often than they should — and if so, recalibrate against observed coverage with no universal multiplier? | 4 |
 | Likelihood Ratio (Bayes odds form) | What is P(E|H)/P(E|¬H), and did I multiply the prior odds by it? | 4 |
 | Expected Value (vNM) | EV = Σ(pᵢ×vᵢ) — which rule: max EV, max EU, minimax regret, or satisfice? | 5 |
 | Risk Aversion / Utility | Is this a one-shot high-stakes bet where raw EV overstates the rational choice? | 5 |
@@ -126,7 +126,7 @@ Ask the whole open frontier in one round — numbered questions, each with a rec
 | Model | Question it answers | Stage |
 |---|---|---|
 | Cynefin Classification (Snowden) | Which cause–effect domain am I in — clear/complicated/complex/chaotic/disorder — and which method does it demand? | 0 |
-| OODA Loop (Boyd) | Is this moving + reversible → act at ~70%, re-observe, loop? | 0 |
+| OODA Loop (Boyd) | Is this moving + reversible → act when reversible mitigation has lower expected harm than waiting, re-observe, loop? | 0 |
 | IS/IS-NOT Matrix (Kepner-Tregoe) | For a selective defect: what/where/when/extent differs from the closest comparable non-affected side? | 1 |
 | Pre-Registered Update Rules (Galef debiasing) | Did I lock "if Z → update to W" + acceptance criteria before seeing the evidence? | 2/4 |
 | MUST/WANT Screen (Kepner-Tregoe) | Which options fail a non-negotiable MUST, and which wins weighted WANTs (1–10)? | 5 |

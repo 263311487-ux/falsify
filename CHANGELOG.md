@@ -7,15 +7,17 @@
 - **README / 元数据 / 落地页等用户可见面的实质更新算 bump（patch）**——用户看到的产物变了，就该有版本。
 - 保持时间倒序；`Distribution log` 是按轮次记录的透明档案。
 
-## 0.8.9 (2026-10-08)
+## 0.8.9 (candidate, 2026-10-09)
 
+- Audit follow-up corrects numeric calibration and noise/auxiliary-assumption guidance. Model evaluations were not rerun; updated expectations remain unvalidated by models.
 - Safer deterministic CLI, no-key coach path, and refusal to overwrite existing or symlinked skill destinations.
 - Historical eval claims now point to provenance and failure-limit notes; manual retries are not presented as proof of variance, and the skill is not presented as a correctness guarantee.
 
 ## 0.8.8 (2026-09-09)
 
-- **真实事故闭环 → 可复用心智模型蒸馏**：home-assistant/core#181420 经官方回滚证实为服务端跨租户数据泄漏（H2 幸存 / H1 本地凭据排除）。将该事故提炼为 5 条可复用判别模式加入 `references/mental-models.md` v0.9 additions——Boundary-Side Classification（动手前先判定缺陷在边界哪一侧：客户端 vs 服务端）/ Raw-API Discriminating Test（最低成本判死实验：绕过集成直调供应商原始 API）/ Cross-Tenant Fingerprint（"我"的症状里出现其他租户命名实体 = 共享数据集被污染的指纹）/ Provider Rollback as Natural Experiment / Exposure-Boundary Note（官方证实了但爆炸半径未证实 → 分开记录，不合并成单一结论）。
-- **README 评测区补真实事故获证文案**：官方已回滚并确认怀疑该变更（Genie，Aladdin 母公司），链接 issue #181420 与我的判别测试评论（获 1 +1）。
+- **更正历史事故表述**：Genie 回滚疑似相关的服务端变更支持服务端方向，但不足以证明完整根因或排除所有本地原因。旧版“跨租户泄漏已证实 / 本地原因已排除”的表述已撤回；原始案例记录保留为历史材料。
+
+- **事故案例蒸馏**：Genie 回滚了其怀疑相关的服务端变更，这支持服务端假设但不足以排除所有本地原因或证明影响范围。后续仓库文案已更正；案例只作为待检验的诊断示例。
 - npm: `falsify-skill@0.8.8`。
 
 ## 0.8.7 (2026-09-07)
@@ -34,7 +36,7 @@
 
 ## 0.8.5 (2026-08-30)
 
-- **README 首屏改造（可见性升级）**：新增徽章行（在线演示 / 双模型 26/28 / 实测 4/4 / AAS ⭐45.5k 收录）；「它改变了什么」before/after 表提前到首屏；安装段前置；中英 README 结构同步；修复 zh 安装段代码围栏。
+- **README 首屏改造（可见性升级）**：新增徽章行（在线演示 / 历史 26/28 / 作者案例分析 / AAS ⭐45.5k 收录）；「它改变了什么」before/after 表提前到首屏；安装段前置；中英 README 结构同步；修复 zh 安装段代码围栏。
 - **版本策略落地**：见顶部 `Versioning policy`——版本号只代表协议或可见面的变化；旧的 0.8.5~0.8.9 发行轮次已合并入 `Distribution log`，不再作为独立版本。
 - **描述工程化**：GitHub + npm 描述重写（关键词前置、五段流程、双模型证据），对齐 Context7 式搜索友好文案。
 - npm: `falsify-skill@0.8.5`（GitHub Release v0.8.5 同步）。
@@ -74,15 +76,15 @@
 - SKILL.md 0.8.2
 ## 0.8.1 (2026-08-27)
 
-- External dogfood cross-validation: 4 real community questions (GitHub oven-sh/bun #25648, Stack Overflow ×3), scored against `evals/rubric.md`; 4/4 passed (avg 17.0/18), and 3/3 cases with ground truth matched reality (Bun name-collision bug fixed in 1.3.7; SO #12868222 accepted answer confirms apples-to-oranges benchmark audit; closed SO #75085169's low-quality answer is a live anti-pattern example)
+- Author-run community case analysis: 4 selected GitHub/Stack Overflow questions (GitHub oven-sh/bun #25648, Stack Overflow ×3), scored against `evals/rubric.md`; 4/4 author-reported descriptive passes (avg 17.0/18), and 3/3 author-reported matches where later facts were available; not independent validation or a paired baseline (Bun name-collision bug fixed in 1.3.7; SO #12868222 accepted answer confirms apples-to-oranges benchmark audit; closed SO #75085169's low-quality answer is a live anti-pattern example)
 - New distillation from external cases: benchmark audit canon (roundtrip counts, page cache, implementation asymmetry — the asker's own code often reveals the flaw), "unsolvable / restart-fixes" red flag (restart = process reset; rebuild-not-fixing ⇒ deterministic code path; cross-platform kills environment theories), and "duplicate-of" chain as free ground truth during verification
 - Evals 26 → 28 cases (benchmark apples-to-oranges, pre-sealed "unsolvable" debugging)
-- Report: `outputs/falsify_dogfood_外部交叉验证_20260827.md`; shipped in-repo as `evals/dogfood-external-20260827.md`
+- Report: `evals/dogfood-external-20260827.md`; shipped in-repo as `evals/dogfood-external-20260827.md`
 
 ## 0.8.0 (2026-08-26)
 
 - Situation routing (Cynefin / Snowden): classify the cause–effect domain before choosing a method — Clear → runbook, Complicated → analyze, Complex → probe safely, Chaotic → stabilize first, Disorder → decompose; the wrong-domain method is itself the failure mode
-- Time-pressure mode (Boyd OODA): moving + reversible → act at ~70% confidence with a known rollback, predict, time-box, re-observe, loop; exit when stable or the next move is irreversible
+- Time-pressure mode (Boyd OODA): moving + reversible → act when reversible mitigation has lower expected harm than waiting, with a known rollback, predict, time-box, re-observe, loop; exit when stable or the next move is irreversible
 - IS/IS-NOT bounding (Kepner-Tregoe): selective defects bounded by WHAT/WHERE/WHEN/EXTENT vs closest comparable IS-NOT + distinctions + nearby changes; a candidate cause survives only if it explains both sides
 - Pre-registered update rules (Galef debiasing): lock "if I observe Z → update to W%" + evidence acceptance criteria BEFORE seeing the evidence; apply mechanically when Z arrives
 - MUST/WANT decision analysis (Kepner-Tregoe): screen MUSTs (pass/fail) and weight WANTs (1–10) before scoring; adverse-consequence test (probability × impact); no option passes MUSTs → return "none"
@@ -95,9 +97,9 @@
 
 - Effort routing (Kahneman dual-process): System 1 for low-stakes/reversible questions, System 2 for high-stakes/irreversible/correctness gates; effort budget five states (automatic → depleted); say when the budget is strained instead of pretending to be deep
 - Satisficing / bounded rationality (Simon): pre-declare the aspiration threshold BEFORE searching, stop at first adequate, never move the goalposts after failure (relax only predeclared non-load-bearing criteria, record the relaxation)
-- Reversal test (Galef scout mindset): would you accept the same evidence reversed? Double standards = motivated reasoning; fix by weighing evidence both ways or rejecting both ways; adjust 10–15% toward 50%
-- Bias audit (Galef / lex-bias): six quick checks (confirmation / availability / anchoring / affect heuristic / overconfidence / sunk cost) with direction + magnitude correction; CI surprise test (widen 1.5–2× when overconfident)
-- Likelihood-ratio calibration (Bayes odds form): LR bands (1–3 weak / 3–10 moderate / 10–100 strong / 100+ definitive / <1 against); posterior odds = prior odds × LR; yesterday's posterior is today's prior
+- Reversal test (Galef scout mindset): would you accept the same evidence reversed? Double standards = motivated reasoning; fix by weighing evidence both ways or rejecting both ways; reassess symmetrically without an arbitrary numerical adjustment
+- Bias audit (Galef / lex-bias): six quick checks (confirmation / availability / anchoring / affect heuristic / overconfidence / sunk cost) with direction + magnitude correction; CI surprise test (recalibrate against observed coverage with no universal multiplier when overconfident)
+- Likelihood-ratio heuristic (Bayes odds form): the displayed bands are prompts for prior-sensitivity checks, not calibrated probability thresholds or a "definitive" label. Posterior odds = prior odds × LR only when the likelihood model and prior are defensible.
 - Expected-value decision rule (von Neumann-Morgenstern): EV = Σ(pᵢ×vᵢ); guardrails (probabilities sum to 1, risk aversion/utility for one-shot high-stakes, tail risk never rounded to zero, sunk costs excluded, option value kept); explicit rule: max EV / max EU / minimax regret / satisfice
 - ADR enriched to five-part template (Context → Decision → Alternatives → Consequences → Status)
 - Guardrails: desire ≠ forecast (Galef); sunk costs stay sunk

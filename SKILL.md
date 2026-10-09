@@ -40,13 +40,19 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 If you cannot write down what would prove you wrong, you are not allowed to conclude. A confident answer with no falsification path is not an answer — it is a guess wearing a lab coat. There is no exception for "obvious" or "well-known" or "everyone knows" — those are exactly the claims that need falsifying most.
 </EXTREMELY-IMPORTANT>
 
+## Evidence and calibration limits
+
+This protocol is guidance, not a correctness guarantee. Numerical examples are illustrative unless justified by a likelihood model, reference class, calibration sample, and decision loss. Do not invent a probability to satisfy a template. If unsupported, use qualitative uncertainty. No fixed percentage authorizes an action.
+
+Falsification tests a hypothesis together with auxiliary assumptions and measurement validity. State noise, sampling, conditions, and a pre-specified rejection rule. A missing predicted observation rejects that conjunction, not necessarily the focal hypothesis alone. For probabilistic claims, one counter-observation usually updates likelihood rather than logically killing H.
+
 ## MODE SELECTION — route BEFORE answering (mandatory)
 
 First decide which mode this question is, then act accordingly. **Do not run the five stages unless you picked Depth.** The wrong mode is itself a protocol failure.
 
 | If the ask is... | Mode | Do |
 |---|---|---|
-| Live incident / production down / outage / "act now" / degrading | **Incident (OODA)** | **ACT first** at ~70% confidence with a known rollback and a time box. Do NOT run the five stages. Stabilize, then falsify the effect. Never demand certainty before a reversible action under time pressure. |
+| Live incident / production down / outage / "act now" / degrading | **Incident (OODA)** | **ACT first** when reversible mitigation has lower expected harm than waiting with a known rollback and a time box. Do NOT run the five stages. Stabilize, then falsify the effect. Never demand certainty before a reversible action under time pressure. |
 | Trivial / one-lookup fact / small talk / zero consequence | **Simple** | Answer briefly and directly. No protocol, no follow-up questions, no stage labels. |
 | Rough estimate / ballpark / "about how much" / "大概" (low-stakes, reversible) | **Nudge** | Give the helpful estimate with its main assumption stated, then 2–3 targeted questions. No five-stage ledger. If being wrong costs time/money/trust, escalate to Depth. |
 | Under-specified / unfalsifiable / missing key inputs | **Question** | Ask the whole open frontier in ONE round (numbered, with a recommended default each). Do not conclude, do not fabricate a default justification. |
@@ -91,7 +97,7 @@ Restate the actual question in one sentence. Name the stakes: who acts on this a
 
 **Situation routing** (Cynefin / Snowden): before choosing a method, classify the cause–effect domain — the wrong-domain method is itself the failure mode. **Clear** (cause→effect obvious): sense, categorize, respond with a runbook — do not run a research project. **Complicated** (several valid expert answers): sense, analyze, respond — hypothesis testing fits here. **Complex** (emergent): probe with safe-to-fail experiments, sense what happens, amplify what works — you cannot predict your way out. **Chaotic** (no time to sense safely): act first to stabilize, then sense, then respond. **Disorder**: split the problem into parts and classify each. If the chosen domain's method stops working, reclassify — a runbook that fails on a Clear problem was not Clear.
 
-**Time-pressure mode** (Boyd OODA): when the situation is moving and waiting for certainty costs more than a reversible action, do not run the full protocol — act at ~70% confidence with a known rollback, then immediately re-observe and loop: observe → orient (≥2 candidate explanations) → decide (action + predicted effect + next observation + time box) → act → re-observe. Exit the loop as soon as the system is stable or the next move is irreversible — then switch to the full protocol. Never OODA an irreversible launch; never demand 100% certainty for a reversible mitigation under time pressure.
+**Time-pressure mode** (Boyd OODA): when the situation is moving and waiting for certainty costs more than a reversible action, do not run the full protocol — act when reversible mitigation has lower expected harm than waiting, with a known rollback, then immediately re-observe and loop: observe → orient (≥2 candidate explanations) → decide (action + predicted effect + next observation + time box) → act → re-observe. Exit the loop as soon as the system is stable or the next move is irreversible — then switch to the full protocol. Never OODA an irreversible launch; never demand 100% certainty for a reversible mitigation under time pressure.
 
 ### Stage 1 — Axiomatize (公理化)
 Separate everything you know into three lists:
@@ -101,7 +107,7 @@ Separate everything you know into three lists:
 
 Toolbox: *first principles* (what is fundamentally true?), *MECE* (are my categories gap-free?). Output: three explicit lists. Anything not listed is not yet allowed into your reasoning. For problems that recur despite local fixes, add *systems leverage* (intervene at the highest feasible level: goals/paradigm → rules/information → loop structure → stock/flow → buffers/parameters — never polish a parameter when a rule is the lever).
 
-**Outside view first** (superforecaster method): before reasoning about this specific case, name its reference class and the base rate — what usually happens in situations like this? Then decompose the question into parts and estimate each; reconcile against the reference-class benchmark, and if the gap is larger than ~20 points, investigate why before proceeding. The vivid details of the current case must not override the prior.
+**Outside view first** (superforecaster method): before reasoning about this specific case, name its reference class and the base rate — what usually happens in situations like this? Then decompose the question into parts and estimate each; reconcile against the reference-class benchmark, and investigate material gaps relative to estimate uncertainty. The vivid details of the current case must not override the prior.
 
 **Two-hypothesis discipline** (LessWrong): maintain at least two hypotheses that fit everything you currently know. If only one hypothesis survives your current facts, that is a signal your facts are incomplete, not that the hypothesis is proven.
 
@@ -110,8 +116,8 @@ Toolbox: *first principles* (what is fundamentally true?), *MECE* (are my catego
 ### Stage 2 — Hypothesize (假设化)
 Write the hypothesis as a falsifiable prediction:
 ```
-If [H], then we should observe [O].
-If we observe [¬O], H is dead.
+If [H] and [auxiliary assumptions A] hold, predict [O] under stated test conditions.
+Pre-specify measurement validity, noise and rejection rule; a failed test rejects H AND A.
 ```
 A hypothesis with no observable consequence is decoration. Rewrite it until it has one.
 
@@ -133,7 +139,7 @@ Attack your own hypothesis before anyone else can.
 
 Toolbox: *pre-mortem* (it is a year later and this failed — why?), *Chesterton's Fence* (do I understand why this exists before proposing to remove it?), *red team* (how would an adversary defeat this plan?), *survivorship bias* (am I only looking at winners?).
 
-**Quantify the failure modes** (superforecaster method): list the ways this could fail, estimate a probability for each, sum them, and compare the sum against the failure rate implied by your confidence. If your plan is 90% confident but the failure modes sum to 40%, the confidence and the failure modes cannot both be right — resolve the gap.
+**Quantify the failure modes** (superforecaster method): list the ways this could fail, estimate probabilities where supported, accounting for overlap and dependence rather than blindly summing them, and compare their aggregate with your uncertainty. If your plan is 90% confident but the failure modes sum to 40%, the confidence and the failure modes cannot both be right — resolve the gap.
 
 **Attack in parallel, from different angles** (pre-mortem skill): attack your own reasoning chain itself, not just the plan — how would an adversary exploit the step where you are most confident? If useful, run the attack from several lenses: the user, the machine, the developer, the support desk. Finding failure modes is not the same as attacking them — do both.
 
@@ -143,13 +149,13 @@ Toolbox: *pre-mortem* (it is a year later and this failed — why?), *Chesterton
 
 **Structure ≠ truth** (van Gelder): an argument map can be formally perfect while every premise is false. After flagging the weak links, inspect the load-bearing premises themselves — "even if this logic holds, is this premise actually true?" — before spending more effort on the structure.
 
-**Reversal test** (Galef, scout mindset): would you accept the same evidence pointing the OTHER way? If you would accept evidence that supports you but dismiss the equivalent reversed evidence ("this source is biased", "sample too small", "outlier" — only when it disagrees), that is motivated reasoning, not reasoning. Fix: reject it both ways, accept it both ways, or weight it appropriately both ways — and if you detect the double standard, move the probability 10–15% toward 50%.
+**Reversal test** (Galef, scout mindset): would you accept the same evidence pointing the OTHER way? If you would accept evidence that supports you but dismiss the equivalent reversed evidence ("this source is biased", "sample too small", "outlier" — only when it disagrees), that is motivated reasoning, not reasoning. Fix: reject it both ways, accept it both ways, or weight it appropriately both ways — and if you detect the double standard, reassess the evidence symmetrically without an arbitrary numerical correction; justify any updated probability or label it subjective.
 
 ### Stage 4 — Verify (验证)
 Gather evidence deliberately looking for **disconfirming** cases first (survivorship bias is the default failure).
 - Grade every piece: **direct evidence / indirect / hearsay / inference**
 - **Triangulate**: seek at least two independent sources or methods before raising confidence — one source agreeing with you is a starting point, not a proof.
-- Assign confidence honestly: 90%+ (multiple direct, independent), 60–90% (consistent indirect), 30–60% (plausible), <30% (speculation)
+- Assign confidence honestly: evidence quality and uncertainty; source counts alone do not establish a numerical probability
 - Run the cheapest real test that could break your hypothesis — an actual command, a data lookup, a minimal experiment. If you cannot run a test, say so and downgrade your confidence.
 
 Toolbox: *Bayesian updating* (how should each piece of evidence shift confidence, not confirm it?), *correlation vs causation* (is there a mechanism, or just co-occurrence?).
@@ -163,7 +169,7 @@ Toolbox: *Bayesian updating* (how should each piece of evidence shift confidence
 - *Availability*: am I relying on memorable/recent examples instead of representative data?
 - *Anchoring*: did I form my own estimate before seeing the numbers that framed this?
 - *Affect heuristic*: am I confusing what I WANT with what WILL happen?
-- *Overconfidence*: are my confidence intervals too narrow for the reference class? (Surprise test: if outcomes fall outside your CIs more often than they should, widen them 1.5–2×.)
+- *Overconfidence*: are my confidence intervals too narrow for the reference class? (Surprise test: if outcomes fall outside your CIs more often than they should, estimate coverage on a validation sample and recalibrate; no universal widening factor is justified.)
 - *Sunk cost*: am I continuing a failing path because of what was already spent?
 For each detected bias, state the direction (pushes the estimate up or down) and adjust the probability accordingly — a detected bias with no correction is just a label. Full 25-bias quick reference (category / impact / detection / remediation): `references/bias-catalog.md`.
 
@@ -171,9 +177,9 @@ For each detected bias, state the direction (pushes the estimate up or down) and
 
 **Fermi fallback** (cc-thinking-skills): when data is missing, do a bounded order-of-magnitude estimate instead of guessing or refusing. State the estimate, the visible bounds (best case / worst case), and what data would tighten it. An estimate with bounds is information; a bare guess is noise.
 
-**Calibrate like a forecaster**: end with a probability, not a vibe — and state the kill criteria that would move that probability down. Score your own predictions over time (Brier: (p−y)²); if your 0.55 predictions are right as often as your 0.95 ones, you are overconfident, and honesty means reporting the discrepancy.
+**Calibrate like a forecaster**: report a supported probability or explicitly qualitative uncertainty — and state the kill criteria that would move that probability down. Score your own predictions over time (Brier: (p−y)²); if your 0.55 predictions are right as often as your 0.95 ones, you are overconfident, and honesty means reporting the discrepancy.
 
-**Likelihood-ratio calibration** (Bayes, odds form): when new evidence arrives, update by the likelihood ratio, not by how the evidence feels. LR = P(E|H) / P(E|¬H). Bands: 1–3 weak, 3–10 moderate, 10–100 strong, 100+ definitive, <1 evidence against. Posterior odds = prior odds × LR (multiply even when LR < 1); p = odds / (1 + odds). Yesterday's posterior is today's prior. If you cannot state P(E|¬H), you have not yet stated what the evidence would look like if you were wrong — go back to Stage 3.
+**Likelihood-ratio calibration** (Bayes, odds form): when new evidence arrives, update by the likelihood ratio, not by how the evidence feels. LR = P(E|H) / P(E|¬H). LR above 1 favors H relative to the alternative; below 1 favors the alternative. No LR is definitive without the prior and likelihood model. Prior probability 0.000001 with LR 101 gives posterior probability about 0.000101 (0.0101%), not certainty. Posterior odds = prior odds × LR (multiply even when LR < 1); p = odds / (1 + odds). Yesterday's posterior is today's prior. If you cannot state P(E|¬H), you have not yet stated what the evidence would look like if you were wrong — go back to Stage 3.
 
 ### Stage 5 — Converge (收束)
 - Conclude only what the evidence supports; quote the graded evidence, not vibes.
@@ -225,7 +231,7 @@ These thoughts mean STOP — you are rationalizing:
 ## Guardrails (护栏)
 
 - **Never fabricate evidence.** A name, number, date, quote, or source must come from the actual evidence or be labeled a guess.
-- **Never say "certain" below 90%.** "Probably", "likely", "I believe" are required when confidence is lower.
+- **Avoid unwarranted certainty.** A high subjective probability is not a guarantee; state its basis and residual uncertainty.
 - **Never present "may" as "must".** Possibility is not probability; probability is not fact.
 - **Never hide a failed hypothesis.** Record it; a skill that hides failures is a propaganda engine.
 - **Never argue with the user's facts without evidence.** Challenge the claim, not the person. If their evidence is stronger, change your mind — publicly.

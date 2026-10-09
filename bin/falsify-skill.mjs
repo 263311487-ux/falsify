@@ -99,7 +99,7 @@ function render(r) {
   const cut = claim.length > 70 ? claim.slice(0, 67) + "…" : claim;
   lines.push(`\n③ ${L("铁律改写", "Iron Law rewrite")}`);
   lines.push(`   ${L("把「", "Rewrite “")}${C.bold}${cut}${C.reset}${L("」改写为：", "” as:")}`);
-  lines.push(`   ${C.dim}  if [H] then I should observe [O]; if ¬O, H is dead.${C.reset}`);
+  lines.push(`   ${C.dim}  H + assumptions predict O; specify noise and a rejection rule.${C.reset}`);
 
   // 4. five-stage checklist
   lines.push(`\n④ ${L("五阶段待核查提示", "Five-stage prompts (not verified)")} ${C.yellow}${L(`缺 ${r.missingCount}/5`, `${r.missingCount}/5 missing`)}${C.reset}`);
@@ -114,7 +114,7 @@ function render(r) {
   lines.push(`   ${L("假设 H：", "Hypothesis H: ")}${cut}`);
   lines.push(`   ${L("备选 A：还有别的解释（数据/环境/时序/行为）", "Rivals: data, environment, timing, behavior")}`);
   lines.push(`   ${L("预测 O：如果 H 为真，[可测量信号] 应出现", "Prediction O: if H holds, [measurable signal] should appear")}`);
-  lines.push(`   ${L("判死：观察到 ¬O 时 H 死亡", "Kill condition: ¬O kills H")}`);
+  lines.push(`   ${L("判死：预设噪声与辅助假设下的拒绝规则", "Kill condition: pre-specify rejection under noise and auxiliary assumptions")}`);
   lines.push(`   ${L("证据等级：事实[ ] 假设[ ] 传闻[ ]", "Evidence grade: fact[ ] assumption[ ] hearsay[ ]")}`);
   lines.push(`   ${L("置信度：___%（基于证据，不是感觉）", "Confidence: ___% (evidence-based, not felt)")}`);
 
