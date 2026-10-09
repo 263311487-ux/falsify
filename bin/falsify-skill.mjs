@@ -37,14 +37,19 @@ function install() {
   try {
     // Preflight both destinations before writing; preserve existing user skills.
     for (const t of targets) {
+      const ancestors = [];
       let current = t.dir;
       while (current !== homedir() && current !== dirname(current)) {
-        try {
-          const stat = lstatSync(current);
-          if (stat.isSymbolicLink()) throw new Error("symlink destination: " + current);
-          if (current === t.dir) throw new Error("already exists: " + current + "; move it aside before installing");
-        } catch (e) { if (e.code !== "ENOENT") throw e; }
+        ancestors.unshift(current);
         current = dirname(current);
+      }
+      for (const destination of ancestors) {
+        try {
+          const stat = lstatSync(destination);
+          if (stat.isSymbolicLink()) throw new Error("symlink destination: " + destination);
+          if (!stat.isDirectory()) throw new Error("non-directory destination ancestor: " + destination);
+          if (destination === t.dir) throw new Error("already exists: " + destination + "; move it aside before installing");
+        } catch (e) { if (e.code !== "ENOENT") throw e; }
       }
     }
     function copyTree(src, dest) {

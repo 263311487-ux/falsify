@@ -18,6 +18,9 @@ jobs:
       - name: Deterministic core and CLI regression tests
         run: node tests/regression.mjs
       - name: Validate historical report provenance
-        run: python3 .github/check_provenance.py
+        run: |
+          python3 .github/check_provenance.py
+          python3 -O .github/check_provenance.py
+          python3 tests/provenance-regression.py
       - name: Isolated package smoke test
         run: npm run test:package

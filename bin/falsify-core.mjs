@@ -13,7 +13,7 @@ export const OBS_WORDS = [
   "fast", "slow", "latency", "crash", "error", "seconds", "percent", "users", "memory", "cpu", "ms", "gb",
 ];
 export const INCIDENT_WORDS = ["事故", "宕机", "线上", "生产", "崩溃", "紧急", "degrad", "outage", "down", "incident"];
-export const NUDGE_WORDS = ["大概", "约", "粗略", "估算", "差不多", "ballpark", "rough", "approximately", "about how much"];
+export const NUDGE_WORDS = ["大概", "约", "粗略", "估算", "差不多", "ballpark", "rough", "roughly", "approximately", "about how much"];
 export const SIMPLE_WORDS = ["几点", "现在时间", "天气", "是谁", "哪年", "what time", "weather", "who is"];
 
 // English keywords match whole words; Chinese keywords remain substring hints.
@@ -33,7 +33,10 @@ export function modeRoute(text) {
   const t = text.toLowerCase();
   const estimate = NUDGE_WORDS.some(w => mentions(t, w));
   const highStakes = /medication|dose|medical|security|production|药物|剂量|医疗|安全|生产/.test(t);
-  if (!(estimate && highStakes) && INCIDENT_WORDS.some(w => mentions(t, w)))
+  // An explicit active-failure cue outranks an estimate request. Environment
+  // words alone (production/线上) must not turn capacity planning into an incident.
+  const activeFailure = INCIDENT_WORDS.filter(w => !["线上", "生产"].includes(w)).some(w => mentions(t, w));
+  if (activeFailure || (!(estimate && highStakes) && INCIDENT_WORDS.some(w => mentions(t, w))))
     return {
       mode: "Incident（事故）",
       zh: "线上事故 → 比较可逆缓解与等待的风险后先稳住，再证伪效果。协议禁止在事故里先跑完整分析。",

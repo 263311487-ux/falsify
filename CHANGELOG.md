@@ -9,6 +9,8 @@
 
 ## 0.8.9 (candidate, 2026-10-09)
 
+- Final regressions: explicit outage cues retain Incident priority during recovery estimates while production sizing remains Depth; all installation ancestors are preflighted before any target write; provenance checks remain active under optimized Python.
+
 - Audit follow-up corrects numeric calibration and noise/auxiliary-assumption guidance. Model evaluations were not rerun; updated expectations remain unvalidated by models.
 - Safer deterministic CLI, no-key coach path, and refusal to overwrite existing or symlinked skill destinations.
 - Historical eval claims now point to provenance and failure-limit notes; manual retries are not presented as proof of variance, and the skill is not presented as a correctness guarantee.
