@@ -139,7 +139,7 @@ Attack your own hypothesis before anyone else can.
 
 Toolbox: *pre-mortem* (it is a year later and this failed — why?), *Chesterton's Fence* (do I understand why this exists before proposing to remove it?), *red team* (how would an adversary defeat this plan?), *survivorship bias* (am I only looking at winners?).
 
-**Quantify the failure modes** (superforecaster method): list the ways this could fail, estimate probabilities where supported, accounting for overlap and dependence rather than blindly summing them, and compare their aggregate with your uncertainty. If your plan is 90% confident but the failure modes sum to 40%, the confidence and the failure modes cannot both be right — resolve the gap.
+**Quantify the failure modes** (superforecaster method): list the ways this could fail, estimate probabilities where supported, accounting for overlap and dependence rather than blindly summing them, and compare their aggregate with your uncertainty. If your plan has 90% estimated success but the estimated probability of at least one failure is 40% after accounting for overlap, these estimates conflict — resolve the gap and document uncertainty.
 
 **Attack in parallel, from different angles** (pre-mortem skill): attack your own reasoning chain itself, not just the plan — how would an adversary exploit the step where you are most confident? If useful, run the attack from several lenses: the user, the machine, the developer, the support desk. Finding failure modes is not the same as attacking them — do both.
 
