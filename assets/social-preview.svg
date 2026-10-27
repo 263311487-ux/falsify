@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <style>text { font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace; }</style>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0c12"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </linearGradient>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.04"/>
+    </pattern>
+    <filter id="glow-gold">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg2)"/>
+  <rect width="1280" height="640" fill="url(#grid2)"/>
+  <rect x="0" y="0" width="3" height="640" fill="#f7c35f" opacity="0.8"/>
+
+  <!-- Tag -->
+  <rect x="64" y="64" width="210" height="28" rx="4" fill="#f7c35f" fill-opacity="0.1" stroke="#f7c35f" stroke-width="0.5" stroke-opacity="0.4"/>
+  <text x="76" y="82" font-size="11" fill="#f7c35f" letter-spacing="2" font-weight="700">SCIENTIFIC THINKING PROTOCOL</text>
+
+  <!-- Title -->
+  <text x="64" y="170" font-size="96" fill="#ffffff" font-weight="700" letter-spacing="-3">falsify</text>
+  <text x="66" y="208" font-size="18" fill="#f7c35f" letter-spacing="0.5" opacity="0.8">for AI agents — before you believe it</text>
+
+  <!-- Iron Law — THE money line, make it massive -->
+  <rect x="64" y="232" width="780" height="2" fill="#f7c35f" fill-opacity="0.2"/>
+  <text x="64" y="284" font-size="22" fill="#f7c35f" font-weight="700" opacity="0.9">NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.</text>
+  <text x="64" y="318" font-size="22" fill="#64748b" font-weight="400">没有可证伪的假设，就没有结论。</text>
+  <rect x="64" y="334" width="780" height="2" fill="#f7c35f" fill-opacity="0.2"/>
+
+  <!-- 5-stage pipeline — horizontal, readable -->
+  <text x="64" y="376" font-size="12" fill="#475569" letter-spacing="1.5">THE FIVE STAGES</text>
+
+  <!-- Stage nodes -->
+  <g>
+    <!-- Stage 1 -->
+    <rect x="64" y="392" width="128" height="40" rx="4" fill="#1e293b" stroke="#f7c35f" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="128" y="408" font-size="10" fill="#f7c35f" text-anchor="middle" letter-spacing="0.5">01</text>
+    <text x="128" y="422" font-size="11" fill="#e2e8f0" text-anchor="middle">Axiomatize</text>
+    <!-- Arrow -->
+    <text x="202" y="416" font-size="16" fill="#475569">→</text>
+    <!-- Stage 2 -->
+    <rect x="216" y="392" width="128" height="40" rx="4" fill="#1e293b" stroke="#f7c35f" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="280" y="408" font-size="10" fill="#f7c35f" text-anchor="middle" letter-spacing="0.5">02</text>
+    <text x="280" y="422" font-size="11" fill="#e2e8f0" text-anchor="middle">Hypothesize</text>
+    <!-- Arrow -->
+    <text x="354" y="416" font-size="16" fill="#475569">→</text>
+    <!-- Stage 3 -->
+    <rect x="368" y="392" width="128" height="40" rx="4" fill="#1e293b" stroke="#ef4444" stroke-width="0.5" stroke-opacity="0.5"/>
+    <text x="432" y="408" font-size="10" fill="#ef4444" text-anchor="middle" letter-spacing="0.5">03</text>
+    <text x="432" y="422" font-size="11" fill="#e2e8f0" text-anchor="middle">Adversarialize</text>
+    <!-- Arrow -->
+    <text x="506" y="416" font-size="16" fill="#475569">→</text>
+    <!-- Stage 4 -->
+    <rect x="520" y="392" width="128" height="40" rx="4" fill="#1e293b" stroke="#4facfe" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="584" y="408" font-size="10" fill="#4facfe" text-anchor="middle" letter-spacing="0.5">04</text>
+    <text x="584" y="422" font-size="11" fill="#e2e8f0" text-anchor="middle">Verify</text>
+    <!-- Arrow -->
+    <text x="658" y="416" font-size="16" fill="#475569">→</text>
+    <!-- Stage 5 -->
+    <rect x="672" y="392" width="128" height="40" rx="4" fill="#1e293b" stroke="#22c55e" stroke-width="0.5" stroke-opacity="0.5"/>
+    <text x="736" y="408" font-size="10" fill="#22c55e" text-anchor="middle" letter-spacing="0.5">05</text>
+    <text x="736" y="422" font-size="11" fill="#e2e8f0" text-anchor="middle">Converge</text>
+  </g>
+
+  <!-- Key features row -->
+  <text x="64" y="478" font-size="13" fill="#64748b">Incident mode · Nudge mode · Depth mode · Bias catalog · Mental model toolbox</text>
+  <text x="64" y="500" font-size="13" fill="#64748b">26/28 eval cases · Zero dependencies · Works with Claude Code · Codex · Cursor · Gemini</text>
+
+  <!-- Bottom line -->
+  <text x="64" y="568" font-size="12" fill="#475569">npx falsify-skill "the cache is definitely the cause"</text>
+
+  <!-- RIGHT: Red flag example -->
+  <rect x="860" y="120" width="340" height="400" rx="8" fill="#0d1117" stroke="#374151" stroke-width="1"/>
+  <rect x="860" y="120" width="340" height="36" rx="8" fill="#1e293b"/>
+  <rect x="860" y="144" width="340" height="2" fill="transparent"/>
+  <text x="872" y="143" font-size="11" fill="#64748b" letter-spacing="1">$ falsify-skill</text>
+
+  <text x="876" y="188" font-size="12" fill="#94a3b8">claim: "obviously a cache issue"</text>
+  <rect x="876" y="198" width="8" height="8" rx="1" fill="#ef4444" opacity="0.8"/>
+  <text x="892" y="207" font-size="11" fill="#ef4444">RED FLAG: "obviously" detected</text>
+
+  <text x="876" y="236" font-size="11" fill="#64748b">mode → Depth</text>
+  <text x="876" y="256" font-size="11" fill="#64748b">iron law rewrite:</text>
+  <text x="876" y="276" font-size="11" fill="#94a3b8">  H: cache TTL expired on deploy</text>
+  <text x="876" y="294" font-size="11" fill="#94a3b8">  predict: cold request 200ms slower</text>
+  <text x="876" y="312" font-size="11" fill="#94a3b8">  kill: same latency on cache flush</text>
+
+  <text x="876" y="348" font-size="11" fill="#64748b">missing stages: 4/5</text>
+  <text x="876" y="368" font-size="11" fill="#64748b">rivals: deploy rollback? network?</text>
+
+  <text x="876" y="408" font-size="11" fill="#64748b">confidence: 0.3 → earn the upgrade</text>
+  <text x="876" y="436" font-size="12" fill="#f7c35f" opacity="0.7">falsify before you believe</text>
+
+  <text x="1030" y="580" font-size="11" fill="#475569" text-anchor="middle">github.com/263311487-ux/falsify</text>
+</svg>
