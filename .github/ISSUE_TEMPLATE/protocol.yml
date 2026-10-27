@@ -1,0 +1,29 @@
+name: Protocol improvement
+description: Suggest a change to the reasoning protocol or a new eval case
+labels: ["protocol"]
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: What reasoning gap does this address?
+      description: Describe a case the current protocol handles poorly.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source / evidence
+      description: Academic paper, practitioner canon, or documented case.
+    validations:
+      required: true
+  - type: textarea
+    id: eval
+    attributes:
+      label: Proposed eval case
+      description: Claim + expected mode + expected stage scores
