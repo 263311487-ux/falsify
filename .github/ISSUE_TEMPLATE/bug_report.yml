@@ -1,0 +1,30 @@
+name: Bug report
+description: CLI crash, wrong mode routing, or incorrect heuristic output
+labels: ["bug"]
+body:
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim you passed to the CLI
+      placeholder: node bin/falsify-skill.mjs "The cache is definitely the cause"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output (mode, stage gaps, or flags)
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: falsify-skill version
+      placeholder: "0.8.9"
+    validations:
+      required: true
